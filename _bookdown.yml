@@ -1,0 +1,59 @@
+book_filename: adv-r-cn
+clean: [packages.bib, bookdown.bbl]
+delete_merged_file: true
+new_session: yes
+language:
+  label:
+    fig: "图 "
+    tab: "表 "
+  ui:
+    edit: "编辑"
+    chapter_name: ["第 ", " 章"]
+
+rmd_files: [
+  "index.Rmd",
+  "00-author.Rmd",
+  "01-introduction.Rmd",
+
+  # 基础篇
+  "foundation-introduction.Rmd",
+  "02-name_and_value.Rmd",
+  "03-vectors.Rmd",
+  "04-subsetting.Rmd",
+  "05-control_flow.Rmd",
+  "06-functions.Rmd",
+  "07-environments.Rmd",
+  "08-conditions.Rmd",
+
+  # 函数式编程
+  "fp-introduction.Rmd",
+  "09-functionals.Rmd",
+  "10-function_factories.Rmd",
+  "11-function_operators.Rmd",
+
+  # 面向对象编程
+  "oo-introduction.Rmd",
+  "12-base_types.Rmd",
+  "13-s3.Rmd",
+  "14-r6.Rmd",
+  "15-s4.Rmd",
+  "16-trade-offs.Rmd",
+
+  # 元编程
+  "mp-introduction.Rmd",
+  "17-big_picture.Rmd",
+  "18-expressions.Rmd",
+  "19-quasiquotation.Rmd",
+  "20-evaluation.Rmd",
+  "21-translating_r_code.Rmd",
+
+  # 编程技巧
+  "techniques-introduction.Rmd",
+  "22-debugging.Rmd",
+  "23-measuring_performance.Rmd",
+  "24-improving_performance.Rmd",
+  "25-rewriting_r_code_in_cpp.Rmd",
+
+  #附录
+  "references.Rmd"
+]

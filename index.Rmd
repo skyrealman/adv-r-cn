@@ -1,0 +1,94 @@
+--- 
+title: "R语言高级程序设计"
+author: "宋震"
+date: "`r Sys.Date()`"
+output: bookdown::bs4_book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+colorlinks: yes
+lot: yes
+lof: yes
+geometry:
+- b5paper
+- tmargin=2.5cm
+- bmargin=2.5cm
+- lmargin=2.5cm
+- rmargin=2.5cm
+site: bookdown::bookdown_site
+knit: bookdown::render_book
+description: 《Advanced R》中文版
+github-repo: skyrealman/adv-r-cn
+documentclass: book
+---
+
+```{r setup, include=FALSE}
+options(
+  htmltools.dir.version = FALSE, formatR.indent = 2, width = 55, digits = 4
+)
+
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  fig.width = 6,
+  fig.height = 4,
+  fig.show = TRUE
+)
+
+# 填上你需要用到的包，如 c('ggplot2', 'dplyr')
+lapply(c('ggplot2', 'dplyr'), function(pkg) {
+  if (system.file(package = pkg) == '') install.packages(pkg)
+})
+```
+
+# 前言 {-}
+
+欢迎阅读《R语言高级程序设计》，本书为**《Advanced R》（第二版）**\index{Advanced R}[@Wickham2021]的中文译版（作者为R语言大神Hadley Wickham），在第二版中作者主要强调了以下三方面的内容：
+
+- 提高对重要概念的覆盖程度，其中很多的概念也是作者在第一版出版后才深入理解的
+- 在第一版中作者认为减少对每项内容的介绍时间是有益处的，但事实证明这种做法并不实用
+- 一般而言，更流畅的文字、更清晰的代码和更丰富的图表使书籍更加容易理解
+
+假如您比较熟悉本书的第一版，可以通过阅读本章节聚焦那些新增的内容。如果您曾经阅读过印刷的版本，您将看到一个巨大的变化：
+第二版是彩色印刷的。这大大改进了代码块语法的突显程度，同时使得图表更加清晰。因此，作者在第二版图书中加入了100多个新的图表，来提升章节知识点的易读性。
+
+这个版本的另一个重大变化是使用了很多新版的包，特别是[rlang](http://rlang.r-lib.org)包，它为一些低级别的数据结构和操作提供了干净的接口。第一版几乎完全使用了base R包的函数，这带来了一些学习上的困难，因为许多函数经过多年独立发展，很难看到隐藏在函数名和参数背后的设计思想。不过作者依然在侧边栏、脚注等地方显示了base R包中相关函数的用法，但如果您希望看到最纯粹的base R表达式，建议阅读本书的第一版[**Advanced R**](http://adv-r.had.co.nz)。
+
+R语言相关的基础知识自本书第一版以来没有发生过变化，但事实上存在很大的不同。因此，第二版的基础知识版块虽然在结构上保持不变，但个别章节有了相当大的改进：
+
+- 第 \@ref(name-and-value) 章“对象名与对象值”是新增加的章节，目的是帮助您快速理解对象与对象引用之间的区别。这有助于您更准确的判断R语言是何时开始复制数据，并为理解函数式编程奠定重要基础。
+- 第 \@ref(vectors) 章“向量”（上个版本称为数据结构）被重写，它更聚焦于整型、因子型和数据框等向量类型。这一章包含了关于S3向量（如时期类型和日期时间类型）更多详细信息，讨论了tibble包[@tibble]提供的全新数据框的变化，总体上反应了作者对向量数据类型的更好理解。
+- 第 \@ref(subsetting) 章“子集”强调了`[`与`[[`的区别：`[`用于提取多个值而`[[`用于提取单个值（以前它们被表示为“简化”或者“保留”）。第 \@ref(subset-multiple) 节通过绘制一列“火车”向您形象的解释了`[[`如何与列表一起工作，同时引入了全新的函数，为索引的越界提供一致化的表达。
+- 第 \@ref(control-flow) 章“控制流”是一个全新的章节：上个版本居然将`if`、`for`等如此重要的工具忘记了！
+- 第 \@ref(functions) 章“函数”改进了章节排序，介绍了管道（`%>%`）这个第三方的函数（第\@ref(function-composition)节），并且覆盖了更多的函数类型（第\@ref(function-form)节）。
+- 第 \@ref(environments) 章“环境”重新组织了特殊环境章节（第\@ref(special-environments)节），同时就堆栈调用开展了更多讨论（第\@ref(call-stack)节）。
+- 第 \@ref(conditions) 章“条件”包含了上一版在“异常和调试”章节中的相关内容，以及关于R语言条件系统如何工作的许多新内容。同时本章还向您展示了如何创建自定义条件类（第\@ref(custom-conditions)节）。
+
+每一部分“基础知识”之后的章节围绕着R语言三种最重要的编程范式重新组织，分别是：函数式编程、面向对象编程和元编程。
+
+- 函数式编程部分被更为清晰的划分为三个章节：“泛型函数（第\@ref(functionals)章）”，“函数工厂（第\@ref(function-factories)章）”，“函数运算符（第\@ref(function-operators)章）”。这部分内容作者减少了纯理论讲述，而聚焦这些范式在数据科学中的实际应用。
+
+  这些章节现在使用了purrr[@purrr]包提供的部分函数，使得读者可以更加聚焦在基本思想而不是附带的细节，这也使得函数运算符这一章更为简化，因为当您使用基础泛型函数时，大部分的工作是在处理不定参数（`...`）的问题。
+
+- 面向对象编程部分由全新的五个章节组成，包括基本类型（第\@ref(base-types)章），S3对象系统（第\@ref(s3)章），S4对象系统（第\@ref(s4)章），R6对象系统（第\@ref(r6)章），并且对比了不同对象系统的优劣（第\@ref(trade-offs)章）。
+
+  这些章节的重点是不同对象系统如何工作，而不是如何有效的使用它们。这是十分必要的，因为很多技术细节没有其它地方可以书写，并且要有效使用面向对象的编程范式需要一整本书的解读。
+
+- 元编程（过去被称为“语言上的计算”）是一组可以通过代码生成代码的工具。对比上一版书籍，这次的版本已经大幅扩展内容，并且聚焦在代码的“整洁性评估”方面，这是一套使元编程安全性更佳、原则性更强以及易用性更广的理论。第\@ref(bigpicture)章“全局”粗略的介绍了如何将所有的代码部件进行拼装；第\@ref(expressions)章“表达式”介绍了底层的数据结构；第\@ref(quasi)章“准引用”介绍了引用与反引用的相关知识；第\@ref(evaluation)章“评估”解释了在特殊环境下如何进行代码评估；第\@ref(translating)章“代码转换”综合上述章节的知识介绍了如何在各种编程语言之间进行转换。
+
+本书的最后一部分汇聚了关于编程技术的相关知识，包括：评测、度量、性能改进以及Rcpp。内容与第一版十分接近，只是在结构组织方面有所调整。作者在这些章节中针对新的软件包使用进行了更新（microbenchmark -> bench，lineprof -> profvis），但大部分文本都是相同的。
+
+虽然第二版的书籍在第一版的基础上扩大了知识的覆盖面，但依然删除了下列五章的内容：
+
+- 词汇表章节被删除，因为它看起来有点奇怪，而且有很多比在书的章节中呈现词汇更有效的办法。
+- 样式章节被在线化的样式指南所替代，<http://style.tidyverse.org>。样式指南可以与很多全新的样式包配套使用。
+- C语言章节被移动到<https://github.com/hadley/r-internals>，随着时间的推移，这将为编写与R的数据结构一起工作的C代码提供指导。
+- 内存章节被删除，其中部分的内容被合并至第\@ref(name-and-value)章，删除了那些看起来很技术化但没有那么重要的内容。
+- R语言的性能章节被删除，这部分内容确实有一些可操作性，但随着R语言的不断发展已经过时。
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+# 译者简介 {#author .unnumbered}
+
+宋震，一名快乐的小销售，喜欢折腾[R](https://www.r-project.org/)，[tidyverse](https://www.tidyverse.org)，[tidymodels](https://www.tidymodels.org)……有时觉得公司的程序员不给力……
+
+## 关于本书 {-}
+
+本书的产生纯属译者2021年国庆假期在家无聊，尝试研究一下R语言相对底层的内容。译者写过不少基于`tidyverse`的数据分析脚本，对R的底层知识产生了浓厚的兴趣，认真学习一下大神的书籍，以便可以出去吹更大的牛逼……
+
+## 关于环境 {-}
+译者用了两个 R 包编译这本书，分别是 **knitr**\index{knitr} [@xie2015] 、**bookdown**\index{bookdown} [@R-bookdown]。以下是译者的 R 进程信息：
+
+```{r}
+sessionInfo()
+```
+
+## 致谢 {-}
+
+非常感谢2021年国庆的大雨，不然我应该还在某条高速上按喇叭呢……
+
+```{block2, type='flushright', html.tag='p'}
+宋震  
+于北京
+2021年10月5日
+```

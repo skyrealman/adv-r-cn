@@ -15,4 +15,14 @@
 
 ## 特殊环境 {#special-environments}
 
+### 包环境与搜索路径 {#package-environment-and-search-path}
+
+### 函数环境 {#function-environment}
+
+### 命名空间 {#namespace}
+
+### 执行环境 {#execution-environment}
+
 ## 堆栈调用 {#call-stack}
+
+## 作为数据结构 {#as-data-structure}

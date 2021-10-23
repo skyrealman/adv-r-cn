@@ -18,7 +18,7 @@ source("common.R")
 
 回答以下问题，看看您是否可以通过本章。 您可以在本章末尾的第 \@ref(name-and-value-answers) 节中找到答案。
 
-1. 给定以下数据框，如何创建一个名为“3”的新列，其中包含 `1` 和 `2` 的总和？ 您只能使用 `$`，而不能使用 `[[`。 是什么让 `1`、`2` 和 `3` 作为变量名具有挑战性？
+1. 给定以下数据框，如何创建一个名为“3”的新列，其中包含 `1` 和 `2` 的总和？ 您只能使用 `$`，而不能使用 `[[`。 是什么让 `1`、`2` 和 `3` 无法直接作为变量名？
 
 ```{r}
 df <- data.frame(runif(3), runif(3))
@@ -497,10 +497,191 @@ knitr::include_graphics("diagrams/name-and-value/v-inplace-2.png")
 
 总之，这两种复杂的情况使得预测是否会产生副本变得很难，因此用`tracemem()`函数来判断是很好的经验。
 
+让我们通过使用for循环的案例研究来探索其中的微妙之处，for循环在R中是比较慢的，这种慢通常是由于循环的每次迭代都会创建一直副本造成的。考虑下面的代码，经从一个大型数据框的每一列减去一个值：
+
+```{r, cache = TRUE}
+x <- data.frame(matrix(runif(5 * 1e4), ncol = 5))
+medians <- vapply(x, median, numeric(1))
+
+for (i in seq_along(medians)) {
+  x[[i]] <- x[[i]] - medians[[i]]
+}
+```
+
+这个循环运行的非常慢，因为每次迭代都会复制数据框，您可以使用`tracemem()`函数来监控运行：
+
+```{r, eval = FALSE}
+cat(tracemem(x), "\n")
+#> <0x7f80c429e020> 
+
+for (i in 1:5) {
+  x[[i]] <- x[[i]] - medians[[i]]
+}
+#> tracemem[0x7f80c429e020 -> 0x7f80c0c144d8]: 
+#> tracemem[0x7f80c0c144d8 -> 0x7f80c0c14540]: [[<-.data.frame [[<- 
+#> tracemem[0x7f80c0c14540 -> 0x7f80c0c145a8]: [[<-.data.frame [[<- 
+#> tracemem[0x7f80c0c145a8 -> 0x7f80c0c14610]: 
+#> tracemem[0x7f80c0c14610 -> 0x7f80c0c14678]: [[<-.data.frame [[<- 
+#> tracemem[0x7f80c0c14678 -> 0x7f80c0c146e0]: [[<-.data.frame [[<- 
+#> tracemem[0x7f80c0c146e0 -> 0x7f80c0c14748]: 
+#> tracemem[0x7f80c0c14748 -> 0x7f80c0c147b0]: [[<-.data.frame [[<- 
+#> tracemem[0x7f80c0c147b0 -> 0x7f80c0c14818]: [[<-.data.frame [[<- 
+#> tracemem[0x7f80c0c14818 -> 0x7f80c0c14880]: 
+#> tracemem[0x7f80c0c14880 -> 0x7f80c0c148e8]: [[<-.data.frame [[<- 
+#> tracemem[0x7f80c0c148e8 -> 0x7f80c0c14950]: [[<-.data.frame [[<- 
+#> tracemem[0x7f80c0c14950 -> 0x7f80c0c149b8]: 
+#> tracemem[0x7f80c0c149b8 -> 0x7f80c0c14a20]: [[<-.data.frame [[<- 
+#> tracemem[0x7f80c0c14a20 -> 0x7f80c0c14a88]: [[<-.data.frame [[<- 
+
+untracemem(x)
+```
+
+事实上，每次迭代不止复制的一次数据框，也不止是两次，而是三次。`[[.data.frame`先生成了两个副本，然后又生成了一个[^shallow-copy]，因为`[[.data.frame`是一个常规函数，它会增加`x`的引用计数。
+
+[^shallow-copy]: 这些都是浅拷贝，它们只是复制了每个列的引用，而不是列的内容，其实性能没有那么差，但也不是最好的方法。
+
+我们可以通过使用列表而不是数据框来减少副本复制的数量，修改列表使用的是内部C函数，因此不会增加引用计数，只生成一个副本：
+
+```{r, eval = FALSE}
+y <- as.list(x)
+cat(tracemem(y), "\n")
+#> <0x7f80c5c3de20>
+  
+for (i in 1:5) {
+  y[[i]] <- y[[i]] - medians[[i]]
+}
+#> tracemem[0x7f80c5c3de20 -> 0x7f80c48de210]: 
+```
+
+虽然不难发现何时产生了副本，但却很难阻止它。如果您发现自己在使用一些奇异的技巧避免产生复制，那可能是时候用C++重写您的函数了，这些内容我们将在第\@ref(rewriting)章中讲述。
+
 ### 环境 {#env-modify}
 
+您将在第\@ref(environments)章学习更多与环境相关的知识，但在这里提及它们十分重要，因为它们的行为与其它对象的行为不同：环境总是在适当的地方进行修改。这种属性有时被成为**引用语义**，因为当您修改环境时，所有这个环境中的所有绑定将继续保持相同的引用。
 
+如同下列这个绑定到`e1`和`e2`的环境：
 
-## 数据解绑与垃圾收集 {#gc}
+```{r}
+e1 <- rlang::env(a = 1, b = 2, c = 3)
+e2 <- e1
+```
+
+```{r, echo = FALSE, out.width = NULL}
+knitr::include_graphics("diagrams/name-and-value/e-modify-1.png")
+```
+
+如果我们改变了绑定，环境也就地修改。
+
+```{r}
+e1$c <- 4
+e2$c
+```
+
+```{r, echo = FALSE, out.width = NULL}
+knitr::include_graphics("diagrams/name-and-value/e-modify-2.png")
+```
+
+这个特性可以用于创建“可记住”先前状态的函数，更多的信息请见\@ref(function-environments)。这个特性实现了R6面向对象系统，这将在第\@ref(r6)章详细介绍。
+
+这样做的一个重要结果是环境可以包含自己：
+
+```{r}
+e <- rlang::env()
+e$self <- e
+
+ref(e)
+```
+
+```{r, echo = FALSE, out.width = NULL}
+knitr::include_graphics("diagrams/name-and-value/e-self.png")
+```
+
+这是环境对象唯一的属性。
+
+### 习题
+
+1. 解释一下为何下列代码没有创建一个循环列表
+
+```{r}
+x <- list()
+x[[1]] <- x
+```
+
+2. 将上述两个减中位数的方法包装成两个函数，调用`bench`包比较两个方法的速度。随着列数增加，性能如何变化？
+
+3. 如果您尝试在环境中使用`tracemem()`函数会发生什么？
+
+## 对象解绑与垃圾收集 {#gc}
+
+考虑下列代码：
+
+```{r}
+x <- 1:3
+```
+
+```{r, echo = FALSE, out.width = NULL}
+knitr::include_graphics("diagrams/name-and-value/unbinding-1.png")
+```
+
+```{r}
+x <- 2:4
+```
+
+```{r, echo = FALSE, out.width = NULL}
+knitr::include_graphics("diagrams/name-and-value/unbinding-2.png")
+```
+
+```{r}
+rm(x)
+```
+
+```{r, echo = FALSE, out.width = NULL}
+knitr::include_graphics("diagrams/name-and-value/unbinding-3.png")
+```
+
+我们创建了两个对象，但等到代码运行完毕后，没有一个对象绑定到了对象名。这些对象如何被删除？这个工作交给了**垃圾收集器**，简称GC。GC释放那些已经被删除的对象所占用的内存，并在需要时从操作系统请求更多内存。
+
+R使用**追踪式**垃圾收集器，这意味着它会跟踪可以从全局环境[^callstack]访问的每个对象，以及可从这些对象上访问的所有对象（即可递归搜索的列表与环境中的引用）。垃圾收集器不使用上述原地修改引用计数，虽然垃圾收集器与引用计数是密切相关的，但内部数据结构针对不同用例进行了优化。
+
+[^callstack]: 以及当前调用堆栈上的每个环境。
+
+每个R需要更多内存来创建新对象时，垃圾收集器(GC)就会自动运行，从外部来看，基本上没法预测GC何时运行。事实上，你也不应该尝试预测。如果您想知道GC何时运行，请调用`gcinfo(TRUE)`，GC将在每次运行时向控制台打印一条消息。
+
+可以通过调用`gc()`函数来强制垃圾收集，这一点您可以已经在其它地方有所了解，但您永远不需要这么做。调用`gc()`的唯一原因可能是要求R将内存返回到操作系统，以便其他程序可以使用它，或者是告诉您当前使用了多少内存，这其实是一个额外的作用：
+
+```{r}
+gc()
+```
+
+`lobstr::mem_used()`函数是`gc()`的包装器，用于打印使用字节的总数：
+
+```{r}
+mem_used()
+```
+
+这个数字与您操作系统显示的可能不一样，主要是由下列三个原因造成的：
+
+1. 它包括由R创建的对象，但不包括由R解释器创建的对象。
+
+2. R和操作系统都是惰性的：它们都是到了真正需要的时候才会回收内存。因此R可能会占用内存，因为操作系统还未要求它返回。
+
+3. R统计对象占用的内存，但可能会因为删除的对象而存在空白。这个问题称为内存碎片化。
 
 ## 测试题答案 {#name-and-value-answers}
+
+1. 你必须使用反引号`` ` ``引用非法名称：例如，例如变量`1`, `2`, `3`。
+```{r}
+df <- data.frame(runif(3), runif(3))
+names(df) <- c(1, 2)
+
+df$`3` <- df$`1` + df$`2`
+```
+
+2. 它大约占用8Mb。
+```{r}
+x <- runif(1e6)
+y <- list(x, x, x)
+obj_size(y)
+```
+
+3. 当`b`发生修改时，`a`会复制。即在`b[[1]] <- 10`这一行发生复制。

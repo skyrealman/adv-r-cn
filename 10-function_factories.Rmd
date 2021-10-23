@@ -1,19 +1,23 @@
 # 函数工厂 {#function-factories}
 
-瞎扯几句。
+## 简介{#function-intro}
 
-## 张老爷子
+## 函数工厂基础 {#factory-fundamentals}
 
-话说张老爷子写了一首诗：
+### 环境 {#function-environments}
 
-> 姑苏开遍碧桃时，邂逅河阳女画师。  
-红豆江南留梦影，白苹风末唱秋词。
+### 图表约定 {#diagram-conventions}
 
-## 彭大将领
+### 强制评估 {#forcing-evaluation}
 
-貌似大家都喜欢用白萍风这个意境。又如彭玉麟的对联：
+### 有状态函数 {#stateful-functions}
 
-> 凭栏看云影波光，最好是红蓼花疏、白苹秋老；  
-把酒对琼楼玉宇，莫孤负天心月到、水面风来。
+### 垃圾收集 {#function-garbage-collection}
 
-嘿，玛尼玛尼哄。
+### 习题
+
+## 图形工厂
+
+## 统计工厂
+
+## 函数工厂与泛函

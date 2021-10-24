@@ -24,7 +24,8 @@ Imports:
     tidyr,
     vctrs,
     zeallot,
-    tibble
+    tibble,
+    dplyr
 Suggests:
     bslib,
     downlit,

@@ -111,6 +111,7 @@ knitr::kable(df, format = "markdown")
 ```
 
 ```{r, include = FALSE}
+library(dplyr)
 ruler <- function(width = getOption("width")) {
   x <- seq_len(width)
   y <- case_when(

@@ -23,7 +23,8 @@ Imports:
     testthat,
     tidyr,
     vctrs,
-    zeallot
+    zeallot,
+    tibble
 Suggests:
     bslib,
     downlit,

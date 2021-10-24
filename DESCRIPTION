@@ -1,10 +1,10 @@
-Package: advr
-Title: Advanced R
+Package: advr_cn
+Title: Advanced R CN
 Version: 1.0.0.9000
 Authors@R: c(
-  person("Hadley", "Wickham", , "hadley@rstudio.com", c("aut", "cre"))
+  person("song", "zhen", email = "songzhen.sz@alibaba-inc.com", role = c("aut", "cre"))
   )
-URL: https://github.com/hadley/adv-r
+URL: https://github.com/skyrealman/adv-r-cn
 Depends:
     R (>= 3.1.0)
 Imports:

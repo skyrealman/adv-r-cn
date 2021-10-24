@@ -34,8 +34,5 @@ Suggests:
     knitr,
     png,
     sessioninfo,
-    xml2
-Remotes:
-    rstudio/bookdown,
-    rstudio/bslib,
-    rstudio/rmarkdown
+    xml2,
+    rmarkdown

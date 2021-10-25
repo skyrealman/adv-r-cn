@@ -7,11 +7,6 @@ addons:
     packages:
     - ghostscript
 
-# safelist
-branches:
-  only:
-  - master
-
 cache:
   packages: yes
   directories:

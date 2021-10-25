@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>第 1 章 全书概览 | R语言高级程序设计</title>
+  <meta name="description" content="《Advanced R》中文版" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="第 1 章 全书概览 | R语言高级程序设计" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="《Advanced R》中文版" />
+  <meta name="github-repo" content="skyrealman/adv-r-cn" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="第 1 章 全书概览 | R语言高级程序设计" />
+  
+  <meta name="twitter:description" content="《Advanced R》中文版" />
+  
+
+<meta name="author" content="宋震" />
+
+
+<meta name="date" content="2021-10-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="author.html"/>
+<link rel="next" href="foundation-intro.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a></li>
+<li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i>译者简介</a>
+<ul>
+<li class="chapter" data-level="" data-path="author.html"><a href="author.html#关于本书"><i class="fa fa-check"></i>关于本书</a></li>
+<li class="chapter" data-level="" data-path="author.html"><a href="author.html#关于环境"><i class="fa fa-check"></i>关于环境</a></li>
+<li class="chapter" data-level="" data-path="author.html"><a href="author.html#致谢"><i class="fa fa-check"></i>致谢</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> 全书概览</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#为什么选择r语言"><i class="fa fa-check"></i><b>1.1</b> 为什么选择R语言</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#本书的读者范围"><i class="fa fa-check"></i><b>1.2</b> 本书的读者范围</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#您将从本书中学到什么"><i class="fa fa-check"></i><b>1.3</b> 您将从本书中学到什么</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#您无法从本书中学到的内容"><i class="fa fa-check"></i><b>1.4</b> 您无法从本书中学到的内容</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#基础技能"><i class="fa fa-check"></i><b>1.5</b> 基础技能</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#推荐阅读"><i class="fa fa-check"></i><b>1.6</b> 推荐阅读</a></li>
+<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#获取帮助"><i class="fa fa-check"></i><b>1.7</b> 获取帮助</a></li>
+<li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#致谢-1"><i class="fa fa-check"></i><b>1.8</b> 致谢</a></li>
+<li class="chapter" data-level="1.9" data-path="intro.html"><a href="intro.html#约定"><i class="fa fa-check"></i><b>1.9</b> 约定</a></li>
+<li class="chapter" data-level="1.10" data-path="intro.html"><a href="intro.html#使用的r包"><i class="fa fa-check"></i><b>1.10</b> 使用的R包</a></li>
+</ul></li>
+<li class="part"><span><b>I 基础知识</b></span></li>
+<li class="chapter" data-level="" data-path="foundation-intro.html"><a href="foundation-intro.html"><i class="fa fa-check"></i>基础知识概述</a></li>
+<li class="chapter" data-level="2" data-path="name-and-value.html"><a href="name-and-value.html"><i class="fa fa-check"></i><b>2</b> 对象名与对象值</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="name-and-value.html"><a href="name-and-value.html#概述"><i class="fa fa-check"></i><b>2.1</b> 概述</a>
+<ul>
+<li class="chapter" data-level="" data-path="name-and-value.html"><a href="name-and-value.html#测验"><i class="fa fa-check"></i>测验</a></li>
+<li class="chapter" data-level="" data-path="name-and-value.html"><a href="name-and-value.html#题纲"><i class="fa fa-check"></i>题纲</a></li>
+<li class="chapter" data-level="" data-path="name-and-value.html"><a href="name-and-value.html#先决条件"><i class="fa fa-check"></i>先决条件</a></li>
+<li class="chapter" data-level="" data-path="name-and-value.html"><a href="name-and-value.html#资源"><i class="fa fa-check"></i>资源</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="name-and-value.html"><a href="name-and-value.html#binding-basics"><i class="fa fa-check"></i><b>2.2</b> 数据绑定基础</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="name-and-value.html"><a href="name-and-value.html#non-syntactic"><i class="fa fa-check"></i><b>2.2.1</b> 命名规则</a></li>
+<li class="chapter" data-level="2.2.2" data-path="name-and-value.html"><a href="name-and-value.html#习题"><i class="fa fa-check"></i><b>2.2.2</b> 习题</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="name-and-value.html"><a href="name-and-value.html#copy-on-modify"><i class="fa fa-check"></i><b>2.3</b> 修改时复制（Copy-on-modify）</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="name-and-value.html"><a href="name-and-value.html#tracemem"><i class="fa fa-check"></i><b>2.3.1</b> <code>tracemem()</code></a></li>
+<li class="chapter" data-level="2.3.2" data-path="name-and-value.html"><a href="name-and-value.html#函数调用"><i class="fa fa-check"></i><b>2.3.2</b> 函数调用</a></li>
+<li class="chapter" data-level="2.3.3" data-path="name-and-value.html"><a href="name-and-value.html#lists"><i class="fa fa-check"></i><b>2.3.3</b> 列表</a></li>
+<li class="chapter" data-level="2.3.4" data-path="name-and-value.html"><a href="name-and-value.html#数据框"><i class="fa fa-check"></i><b>2.3.4</b> 数据框</a></li>
+<li class="chapter" data-level="2.3.5" data-path="name-and-value.html"><a href="name-and-value.html#字符向量"><i class="fa fa-check"></i><b>2.3.5</b> 字符向量</a></li>
+<li class="chapter" data-level="2.3.6" data-path="name-and-value.html"><a href="name-and-value.html#习题-1"><i class="fa fa-check"></i><b>2.3.6</b> 习题</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="name-and-value.html"><a href="name-and-value.html#object-size"><i class="fa fa-check"></i><b>2.4</b> 对象大小</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="name-and-value.html"><a href="name-and-value.html#习题-2"><i class="fa fa-check"></i><b>2.4.1</b> 习题</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="name-and-value.html"><a href="name-and-value.html#modify-on-place"><i class="fa fa-check"></i><b>2.5</b> 原地修改（Modify-on-place）</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="name-and-value.html"><a href="name-and-value.html#single-binding"><i class="fa fa-check"></i><b>2.5.1</b> 单一绑定对象</a></li>
+<li class="chapter" data-level="2.5.2" data-path="name-and-value.html"><a href="name-and-value.html#env-modify"><i class="fa fa-check"></i><b>2.5.2</b> 环境</a></li>
+<li class="chapter" data-level="2.5.3" data-path="name-and-value.html"><a href="name-and-value.html#习题-3"><i class="fa fa-check"></i><b>2.5.3</b> 习题</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="name-and-value.html"><a href="name-and-value.html#gc"><i class="fa fa-check"></i><b>2.6</b> 对象解绑与垃圾收集</a></li>
+<li class="chapter" data-level="2.7" data-path="name-and-value.html"><a href="name-and-value.html#name-and-value-answers"><i class="fa fa-check"></i><b>2.7</b> 测试题答案</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="vectors.html"><a href="vectors.html"><i class="fa fa-check"></i><b>3</b> 向量</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="vectors.html"><a href="vectors.html#概述-1"><i class="fa fa-check"></i><b>3.1</b> 概述</a>
+<ul>
+<li class="chapter" data-level="" data-path="vectors.html"><a href="vectors.html#测试"><i class="fa fa-check"></i>测试</a></li>
+<li class="chapter" data-level="" data-path="vectors.html"><a href="vectors.html#题纲-1"><i class="fa fa-check"></i>题纲</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="vectors.html"><a href="vectors.html#atomic-vector"><i class="fa fa-check"></i><b>3.2</b> 原子向量</a></li>
+<li class="chapter" data-level="3.3" data-path="vectors.html"><a href="vectors.html#attribute"><i class="fa fa-check"></i><b>3.3</b> 属性</a></li>
+<li class="chapter" data-level="3.4" data-path="vectors.html"><a href="vectors.html#s3-atomic-vector"><i class="fa fa-check"></i><b>3.4</b> S3原子向量</a></li>
+<li class="chapter" data-level="3.5" data-path="vectors.html"><a href="vectors.html#list"><i class="fa fa-check"></i><b>3.5</b> 列表</a></li>
+<li class="chapter" data-level="3.6" data-path="vectors.html"><a href="vectors.html#dataframe-and-tibble"><i class="fa fa-check"></i><b>3.6</b> 数据框和tibble</a></li>
+<li class="chapter" data-level="3.7" data-path="vectors.html"><a href="vectors.html#null"><i class="fa fa-check"></i><b>3.7</b> NULL</a></li>
+<li class="chapter" data-level="3.8" data-path="vectors.html"><a href="vectors.html#vector-quiz-answer"><i class="fa fa-check"></i><b>3.8</b> 测试题答案</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="subsetting.html"><a href="subsetting.html"><i class="fa fa-check"></i><b>4</b> 子集</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="subsetting.html"><a href="subsetting.html#简介"><i class="fa fa-check"></i><b>4.1</b> 简介</a></li>
+<li class="chapter" data-level="4.2" data-path="subsetting.html"><a href="subsetting.html#subset-multiple"><i class="fa fa-check"></i><b>4.2</b> 选择多个元素</a></li>
+<li class="chapter" data-level="4.3" data-path="subsetting.html"><a href="subsetting.html#subset-single"><i class="fa fa-check"></i><b>4.3</b> 选择单个元素</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="control-flow.html"><a href="control-flow.html"><i class="fa fa-check"></i><b>5</b> 控制流</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="control-flow.html"><a href="control-flow.html#张老爷子"><i class="fa fa-check"></i><b>5.1</b> 张老爷子</a></li>
+<li class="chapter" data-level="5.2" data-path="control-flow.html"><a href="control-flow.html#彭大将领"><i class="fa fa-check"></i><b>5.2</b> 彭大将领</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>6</b> 函数</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="functions.html"><a href="functions.html#简介-1"><i class="fa fa-check"></i><b>6.1</b> 简介</a></li>
+<li class="chapter" data-level="6.2" data-path="functions.html"><a href="functions.html#function-composition"><i class="fa fa-check"></i><b>6.2</b> 函数组合</a></li>
+<li class="chapter" data-level="6.3" data-path="functions.html"><a href="functions.html#function-form"><i class="fa fa-check"></i><b>6.3</b> 函数类型</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="environments.html"><a href="environments.html"><i class="fa fa-check"></i><b>7</b> 环境</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="environments.html"><a href="environments.html#简介-2"><i class="fa fa-check"></i><b>7.1</b> 简介</a></li>
+<li class="chapter" data-level="7.2" data-path="environments.html"><a href="environments.html#基础环境"><i class="fa fa-check"></i><b>7.2</b> 基础环境</a></li>
+<li class="chapter" data-level="7.3" data-path="environments.html"><a href="environments.html#在环境上递归"><i class="fa fa-check"></i><b>7.3</b> 在环境上递归</a></li>
+<li class="chapter" data-level="7.4" data-path="environments.html"><a href="environments.html#special-environments"><i class="fa fa-check"></i><b>7.4</b> 特殊环境</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="environments.html"><a href="environments.html#package-environment-and-search-path"><i class="fa fa-check"></i><b>7.4.1</b> 包环境与搜索路径</a></li>
+<li class="chapter" data-level="7.4.2" data-path="environments.html"><a href="environments.html#function-environment"><i class="fa fa-check"></i><b>7.4.2</b> 函数环境</a></li>
+<li class="chapter" data-level="7.4.3" data-path="environments.html"><a href="environments.html#namespace"><i class="fa fa-check"></i><b>7.4.3</b> 命名空间</a></li>
+<li class="chapter" data-level="7.4.4" data-path="environments.html"><a href="environments.html#execution-environment"><i class="fa fa-check"></i><b>7.4.4</b> 执行环境</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="environments.html"><a href="environments.html#call-stack"><i class="fa fa-check"></i><b>7.5</b> 堆栈调用</a></li>
+<li class="chapter" data-level="7.6" data-path="environments.html"><a href="environments.html#as-data-structure"><i class="fa fa-check"></i><b>7.6</b> 作为数据结构</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="conditions.html"><a href="conditions.html"><i class="fa fa-check"></i><b>8</b> 条件</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="conditions.html"><a href="conditions.html#custom-conditions"><i class="fa fa-check"></i><b>8.1</b> 自定义条件</a></li>
+</ul></li>
+<li class="part"><span><b>II 函数式编程</b></span></li>
+<li class="chapter" data-level="" data-path="fp-intro.html"><a href="fp-intro.html"><i class="fa fa-check"></i>函数式编程概述</a></li>
+<li class="chapter" data-level="9" data-path="functionals.html"><a href="functionals.html"><i class="fa fa-check"></i><b>9</b> 泛型函数</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="functionals.html"><a href="functionals.html#张老爷子-1"><i class="fa fa-check"></i><b>9.1</b> 张老爷子</a></li>
+<li class="chapter" data-level="9.2" data-path="functionals.html"><a href="functionals.html#彭大将领-1"><i class="fa fa-check"></i><b>9.2</b> 彭大将领</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="function-factories.html"><a href="function-factories.html"><i class="fa fa-check"></i><b>10</b> 函数工厂</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="function-factories.html"><a href="function-factories.html#function-intro"><i class="fa fa-check"></i><b>10.1</b> 简介</a></li>
+<li class="chapter" data-level="10.2" data-path="function-factories.html"><a href="function-factories.html#factory-fundamentals"><i class="fa fa-check"></i><b>10.2</b> 函数工厂基础</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="function-factories.html"><a href="function-factories.html#function-environments"><i class="fa fa-check"></i><b>10.2.1</b> 环境</a></li>
+<li class="chapter" data-level="10.2.2" data-path="function-factories.html"><a href="function-factories.html#diagram-conventions"><i class="fa fa-check"></i><b>10.2.2</b> 图表约定</a></li>
+<li class="chapter" data-level="10.2.3" data-path="function-factories.html"><a href="function-factories.html#forcing-evaluation"><i class="fa fa-check"></i><b>10.2.3</b> 强制评估</a></li>
+<li class="chapter" data-level="10.2.4" data-path="function-factories.html"><a href="function-factories.html#stateful-functions"><i class="fa fa-check"></i><b>10.2.4</b> 有状态函数</a></li>
+<li class="chapter" data-level="10.2.5" data-path="function-factories.html"><a href="function-factories.html#function-garbage-collection"><i class="fa fa-check"></i><b>10.2.5</b> 垃圾收集</a></li>
+<li class="chapter" data-level="10.2.6" data-path="function-factories.html"><a href="function-factories.html#习题-4"><i class="fa fa-check"></i><b>10.2.6</b> 习题</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="function-factories.html"><a href="function-factories.html#图形工厂"><i class="fa fa-check"></i><b>10.3</b> 图形工厂</a></li>
+<li class="chapter" data-level="10.4" data-path="function-factories.html"><a href="function-factories.html#统计工厂"><i class="fa fa-check"></i><b>10.4</b> 统计工厂</a></li>
+<li class="chapter" data-level="10.5" data-path="function-factories.html"><a href="function-factories.html#函数工厂与泛函"><i class="fa fa-check"></i><b>10.5</b> 函数工厂与泛函</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="function-operators.html"><a href="function-operators.html"><i class="fa fa-check"></i><b>11</b> 函数运算符</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="function-operators.html"><a href="function-operators.html#张老爷子-2"><i class="fa fa-check"></i><b>11.1</b> 张老爷子</a></li>
+<li class="chapter" data-level="11.2" data-path="function-operators.html"><a href="function-operators.html#彭大将领-2"><i class="fa fa-check"></i><b>11.2</b> 彭大将领</a></li>
+</ul></li>
+<li class="part"><span><b>III 面向对象编程</b></span></li>
+<li class="chapter" data-level="" data-path="oo-intro.html"><a href="oo-intro.html"><i class="fa fa-check"></i>面向对象编程概述</a></li>
+<li class="chapter" data-level="12" data-path="base-types.html"><a href="base-types.html"><i class="fa fa-check"></i><b>12</b> 基础类型</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="base-types.html"><a href="base-types.html#张老爷子-3"><i class="fa fa-check"></i><b>12.1</b> 张老爷子</a></li>
+<li class="chapter" data-level="12.2" data-path="base-types.html"><a href="base-types.html#彭大将领-3"><i class="fa fa-check"></i><b>12.2</b> 彭大将领</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="s3.html"><a href="s3.html"><i class="fa fa-check"></i><b>13</b> S3对象系统</a></li>
+<li class="chapter" data-level="14" data-path="r6.html"><a href="r6.html"><i class="fa fa-check"></i><b>14</b> R6对象系统</a></li>
+<li class="chapter" data-level="15" data-path="s4.html"><a href="s4.html"><i class="fa fa-check"></i><b>15</b> S4对象系统</a></li>
+<li class="chapter" data-level="16" data-path="trade-offs.html"><a href="trade-offs.html"><i class="fa fa-check"></i><b>16</b> 对比分析</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="trade-offs.html"><a href="trade-offs.html#简介-3"><i class="fa fa-check"></i><b>16.1</b> 简介</a></li>
+<li class="chapter" data-level="16.2" data-path="trade-offs.html"><a href="trade-offs.html#彭大将领-4"><i class="fa fa-check"></i><b>16.2</b> 彭大将领</a></li>
+</ul></li>
+<li class="part"><span><b>IV 元编程</b></span></li>
+<li class="chapter" data-level="" data-path="mp-intro.html"><a href="mp-intro.html"><i class="fa fa-check"></i>元编程概述</a></li>
+<li class="chapter" data-level="17" data-path="bigpicture.html"><a href="bigpicture.html"><i class="fa fa-check"></i><b>17</b> 全局</a></li>
+<li class="chapter" data-level="18" data-path="expressions.html"><a href="expressions.html"><i class="fa fa-check"></i><b>18</b> 表达式</a></li>
+<li class="chapter" data-level="19" data-path="quasi.html"><a href="quasi.html"><i class="fa fa-check"></i><b>19</b> 准引用</a></li>
+<li class="chapter" data-level="20" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>20</b> 评估</a></li>
+<li class="chapter" data-level="21" data-path="translating.html"><a href="translating.html"><i class="fa fa-check"></i><b>21</b> R代码转换</a></li>
+<li class="part"><span><b>V 编程技巧</b></span></li>
+<li class="chapter" data-level="" data-path="tech-intro.html"><a href="tech-intro.html"><i class="fa fa-check"></i>编程技巧概述</a></li>
+<li class="chapter" data-level="22" data-path="debugging.html"><a href="debugging.html"><i class="fa fa-check"></i><b>22</b> 代码调试</a></li>
+<li class="chapter" data-level="23" data-path="measuring.html"><a href="measuring.html"><i class="fa fa-check"></i><b>23</b> 性能度量</a></li>
+<li class="chapter" data-level="24" data-path="improving.html"><a href="improving.html"><i class="fa fa-check"></i><b>24</b> 性能改进</a></li>
+<li class="chapter" data-level="25" data-path="rewriting.html"><a href="rewriting.html"><i class="fa fa-check"></i><b>25</b> 在C++中重写R代码</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R语言高级程序设计</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="intro" class="section level1" number="1">
+<h1><span class="header-section-number">第 1 章</span> 全书概览</h1>
+<p>我已经在R领域编程超过15年了，在过去的5年里一直全职从事这项工作，这给了我足够的时间来研究这个语言是如何工作的。这本书是我试图将学到的知识传授给大家，这样您就可以快速理解R语言的细节。阅读此书可以帮助您避免我曾经走过的弯路，并教会您使用R语言的工具、技巧和习惯，帮助您解决各类问题。在这个过程中，我希望可以告诉大家，尽管R语言有时存在一些问题，但它的核心是一种为数据科学量身定做的优雅语言。</p>
+<div id="为什么选择r语言" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> 为什么选择R语言</h2>
+<p>如果您是一名R语言初学者，您可能需要了解为什么学习这样一门奇怪的语言是值得的，对我而言，R语言最棒的地方体现在：</p>
+<ul>
+<li>R是免费，开源，跨平台的语言。如果您使用R语言开展数据分析，任何人都可以很便捷的使用您的代码。</li>
+<li>R拥有多样化并且广受欢迎的社区，既包括了在线社区（如rstats twitter社区），也包括了线下面对面社区（如许多R语言用户见面会）。这其中有两个令人振奋的社区组织，一个是R语言每周通讯，它可以让您方便的了解R语言的相关信息。另一个是R-Ladies，它是一个面向女性用户及少数性别用户的社区。</li>
+<li>R拥有大量的统计建模、机器学习、可视化分析以及数据处理方面的工具包，无论您需要绘制图形还是建立模型，很有可能前人已经帮您完成了相关工作，您可以从中学习到很多知识。</li>
+<li>R拥有用于展示成果的强大工具。RMarkdown可以轻松的将结果转换为HTML文件、PDF文件、Word文档、PowerPoint演示文稿、仪表盘等。Shiny可以帮助您在无需了解任何HTML或Javascript知识情况下创建漂亮的交互式应用程序。</li>
+<li>R提供了RStudio集成开发环境，可以根据数据科学、交互式数据分析和统计编程的需要进行定制。</li>
+<li>R拥有大量尖端工具，统计学和机器学习领域的研究人员通常会在他们的论文中配套一个R包，这意味着您可以立即获得最新的理论研究与技术实现。</li>
+<li>R是数据分析领域的深层支撑语言，拥有缺失值、数据框、矢量化等诸多功能。</li>
+<li>R对于函数式编程范式的支撑非常强大，函数式编程的思想十分契合数据科学，R的核心就是函数式，它提供了函数式编程所需要的许多原生能力。</li>
+<li>RStudio是一家通过向R用户销售专业产品来盈利的公司，它将大部分资金投入到开源社区（RStudio中超过50%的软件工程师从事开源项目）。我为RStudio工作，因为我从根本上相信它的使命。</li>
+<li>强大的元编程工具。R的元编程功能使您能够神奇地编写简洁明了的函数，并为设计特定领域的语言（如ggplot2、dplyr、data.table等）提供了一个极好的环境。</li>
+<li>R可以轻松协同C、Fortran和C++这样的高性能编程语言。</li>
+</ul>
+<p>当然，R语言并不完美，R所面临的最大挑战（也许是机遇）是R的主要用户并非程序员，这意味着：</p>
+<ul>
+<li>您通常所看到的R代码都是为了解决一个紧迫的问题而匆忙编写的，因此代码并不是很优雅，且不易理解，而大多数用户不会去开展这些代码的优化工作。</li>
+<li>相较于其他编程语言，R社区更关注结果而并不是过程，软件工程化是的相关优秀经验并没有在R语言开发中的完整应用。例如，大部分的R开发者没有使用源代码控制或或自动化测试。</li>
+<li>元编程是一把双刃剑，很多R语言的函数使用一些代码技巧来减少键入量，这样的代价是代码变得难以理解或者出产生无法预料的错误。</li>
+<li>前后不一致是R包中普遍存在的问题，每次使用R语言的时候，您都可以感受到超过25年的演进，这使得学习R非常困难，有太多的特殊情况需要记住。</li>
+<li>R并不是一种速度很快的语言，写得不好的R代码可能会非常慢。R也是一个内存使用的大户。</li>
+</ul>
+<p>我个人认为，这些挑战为经验丰富的程序员创造了一个巨大的机会，对R语言和R社区会产生积极深远的影响。R用户确实希望产出高质量的代码，特别是用于可复制的研究，但他们还没有掌握这样的技能。我希望这本书不仅能帮助更多的R语言的用户成为R程序员，还能鼓励其他语言的程序员为R做出贡献。</p>
+</div>
+<div id="本书的读者范围" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> 本书的读者范围</h2>
+<p>本书面向两类读者：</p>
+<ul>
+<li>中级R语言程序员。他们希望深入研究R，了解这门语言的工作原理，学习新方法解决各类问题。</li>
+<li>正在学习R的其他语言程序员。他们想了解为什么R语言会这样工作。</li>
+</ul>
+<p>如果想要充分理解本书的内容，您需要用R或者其它语言编写大量的代码。您应该熟悉数据分析的基础知识（即数据导入、数据操作和数据可视化），编写过很多相关的函数，并熟悉CRAN软件包的的安装和使用。</p>
+<p>我曾经在将这本书定义为参考书（主要用于查找）还是线性可读书籍之间纠结过。 这涉及一些权衡，因为很难在将相关材料保持在一起的同时还对材料进行线性化，而且如果您已经熟悉特定的技术词汇，那么某些概念更容易解释。我尝试使用脚注和交叉引用来确保即使您只是阅读了这章节，您仍然可以理解相关内容。</p>
+</div>
+<div id="您将从本书中学到什么" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> 您将从本书中学到什么</h2>
+<p>这本书提供了我认为高级 R 程序员应该具备的知识：对基础知识的深刻理解加上广泛的词汇，这意味着您可以在需要时了解更多关于某个主题的知识。</p>
+<p>阅读本书之后，您将：</p>
+<ul>
+<li>熟悉 R 的基础。您将了解复杂的数据类型以及对它们执行操作的最佳方法。您将对函数的工作方式有深入的了解，您将知道什么是环境，以及如何使用条件系统。</li>
+<li>了解函数式编程的含义，以及为什么它是数据科学的有用工具。您将能够快速学习如何使用现有工具，并在需要时拥有创建自己所需工具的能力。</li>
+<li>了解 R 丰富多样的面向对象系统。您将最熟悉 S3，但您也会了解 S4 和 R6 以及在需要时从哪里可以查找到更多有关的信息。</li>
+<li>感受元编程范式的优劣性。您将能够创建使用tidy风格的函数，减少代码的输入量，同时创建优雅的代码来实现重要的功能。您还将了解元编程的相关劣势以及如何避免。</li>
+<li>拥有R语言性能方面的良好直觉。您将了解到如何使用R的分析能力来查明性能瓶颈，并且您将了解足够的 C++ 知识，以便您可将慢速 R 函数转换为快速 C++ 函数。</li>
+</ul>
+</div>
+<div id="您无法从本书中学到的内容" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> 您无法从本书中学到的内容</h2>
+<p>这本书是关于R语言程序设计的，不是R语言数据分析。如果您需要提升自身在数据科学方面的技能，我建议您去学习<a href="https://www.tidyverse.org/">tidyverse</a>，这是我与我的同事们开发的一组工具包。在本书中您将学习开发tidyverse包的相关技能；如果您想学习如何使用它们，我推荐<a href="http://r4ds.had.co.nz/"><em>R for Data Science</em></a>。</p>
+<p>如果您希望他人使用您的代码，那么需要制作一个R包。这允许您可以将代码与文档、单元测试等捆绑在一起，并通过CRAN轻松分发。在我看来，开发一个包最简单的方法是使用<a href="http://devtools.r-lib.org">devtools</a>, <a href="http://klutometis.github.io/roxygen/">roxygen2</a>, <a href="http://testthat.r-lib.org">testthat</a>和 <a href="http://usethis.r-lib.org">usethis</a>. 你可以通过学习<a href="http://r-pkgs.had.co.nz/"><em>R packages</em></a>这本书来了解上述工具包如何使用。</p>
+</div>
+<div id="基础技能" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> 基础技能</h2>
+<p>有两种基础技能对提高R语言程序员的能力很有帮助：阅读代码与科学思维</p>
+<p>阅读源代码很重要，因为它可以帮助您编写更好的代码。培养这项技能的一个好方法是查看您最常使用的函数和包的源代码。您可以在自己的代码中使用这些值得效仿的东西，您会对什么是好的 R 代码产生一种品味。您也会看到你不喜欢的东西，要么是因为它的优点不明显，要么是因为它冒犯了您的敏感性。尽管如此，这样的代码还是很有价值的，因为它有助于让您对好的代码和坏的代码建立自身的认识。</p>
+<p>在学习 R 时，科学思维非常有帮助。如果您不了解某些东西是如何工作的，您应该提出一个假设，设计一些实验，运行它们并记录结果。这种方式非常有用，因为如果您自身无法解决问题并需要帮助，您可以轻松地向他人展示您的实验。同样，当您获取到了正确知识时，您也将更加认同这样的思维学习方式。</p>
+</div>
+<div id="推荐阅读" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> 推荐阅读</h2>
+<p>由于 R 社区主要由数据科学家而非计算机科学家组成，因此深入研究 R 技术基础的书籍相对较少。在我个人理解 R 的过程中，我发现使用其他编程中的资源十分有意义。 R 具有函数式编程和面向对象 (OO)编程两种特性，了解这些特性在 R中如何实现将帮助您充分利用现有在其他语言中建立的知识体系，并将帮助您确认可以改进的方向。</p>
+<p>如果您想要了解R的对象系统是如何工作的，<em>《计算机程序的构造和解释》（SICP）</em><span class="citation">(<a href="#ref-SICP" role="doc-biblioref">Abelson, Sussman, and Sussman 1996</a>)</span> 这本书非常有帮助。这是一本简介而深刻的书，读完这本书，我第一次感觉自己可以设计一个面向对象系统了。这本书是R语言面向对象编程范式的灵感起源，它帮助我了解了这种范式的优缺点。SICP还可以教会大家函数式编程范式，您可以创建相对独立的“纯”函数，并将它们组合起来实现更强大的功能。</p>
+<p>为了了解R语言与其它编程语言之间的优劣，<em>《计算机编程的概念，技术与模型》</em><span class="citation">(<a href="#ref-ctmcp" role="doc-biblioref">Van-Roy and Haridi 2004</a>)</span>这本书非常有用，它让我了解了R语言copy-on-modify的含义，这使得代码理解更加容易，虽然它的实现方式并不是十分有效，但这是一个可以解决的问题。</p>
+<p>如果您想成为一名更好的程序员，没有比阅读<em>《程序员修炼之道》</em><span class="citation">(<a href="#ref-pragprog" role="doc-biblioref">Hunt and Thomas 1990</a>)</span>更好的选择了。这本书与编程语言无关，它为如何成为一句更好的程序员提供了很好的建议。</p>
+</div>
+<div id="获取帮助" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> 获取帮助</h2>
+<p>当您遇到无法解决的问题时，有三个主要的途径可以获取帮助：<a href="https://community.rstudio.com/">RStudio社区</a>、<a href="http://stackoverflow.com">StackOverflow</a> 和 <a href="https://stat.ethz.ch/mailman/listinfo/r-help">R-help邮件列表</a>。您可以在每个地方获取到帮助，但这些地方也各有特色。在发布第一个贴子之前，花一点时间了解社区的风格是一个比较好的做法。</p>
+<p>再给大家一些通用的建议：</p>
+<ul>
+<li>请确保您安装了最新版本的R语言及工具包，或许您遇到的问题已经在最新版本中作为bug被修复。</li>
+<li>花一些时间创建一个可重现的实验或者reprex，这将帮助他人也帮助您自己，而且有时候可以在不询问他人的情况下找到答案，因为在使问题重现的过程中，您通常会找出问题所在。我强烈推荐学习和使用<a href="https://reprex.tidyverse.org/">reprex</a>包。</li>
+</ul>
+<p>如果您需要针对本书习题的帮助，可以从 Malte Grosser 和 Henning Bumann 获得解决方案，网址为 <a href="https://advanced-r-solutions.rbind.io" class="uri">https://advanced-r-solutions.rbind.io</a></p>
+</div>
+<div id="致谢-1" class="section level2" number="1.8">
+<h2><span class="header-section-number">1.8</span> 致谢</h2>
+<p>我要感谢 R-devel 和 R-help 的许多贡献者以及Stack Overflow 和 RStudio 社区。 有太多朋友对本书进行了贡献，原谅我无法一一列举，但我要特别感谢 Luke Tierney、John Chambers、JJ Allaire 和 Brian Ripley，他们慷慨地付出了宝贵的时间，纠正了我许多的错误。</p>
+<p>这本书是公开编写的，完成后会在推特上发布章节。 这确实是一项社区努力：许多人阅读草稿、进行勘误、提出改进建议并贡献内容。 如果没有这些贡献者，这本书就不会这么好，我非常感谢他们的帮助。 特别感谢 Jeff Hammerbacher、Peter Li、Duncan Murdoch 和 Greg Wilson，他们从头到尾阅读了本书并提供了许多修正和建议。</p>
+</div>
+<div id="约定" class="section level2" number="1.9">
+<h2><span class="header-section-number">1.9</span> 约定</h2>
+<p>全书我使用<code>f()</code>代表函数，<code>g</code>代表变量和函数参数，<code>h/</code>代表路径</p>
+<p>较大的代码块包含了输入和输出。 输出带有注释 (<code>#&gt;</code>)，因此如果您有本书的电子版本，例如 <a href="https://adv-r.hadley.nz/" class="uri">https://adv-r.hadley.nz/</a>，您可以轻松地将示例复制并粘贴到 R 中运行。</p>
+<p>本书许多示例使用了随机数，我们需要设定<code>set.seed(1014)</code>使结果重现，它在每章开始时自动执行。
+</p>
+</div>
+<div id="使用的r包" class="section level2" number="1.10">
+<h2><span class="header-section-number">1.10</span> 使用的R包</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">package</th>
+<th align="left">version</th>
+<th align="left">source</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">bench</td>
+<td align="left">1.1.1</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="even">
+<td align="left">bookdown</td>
+<td align="left">0.24</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="odd">
+<td align="left">bslib</td>
+<td align="left">0.3.1</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="even">
+<td align="left">dbplyr</td>
+<td align="left">2.1.1</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="odd">
+<td align="left">desc</td>
+<td align="left">1.4.0</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="even">
+<td align="left">downlit</td>
+<td align="left">0.2.1</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="odd">
+<td align="left">dplyr</td>
+<td align="left">1.0.7</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="even">
+<td align="left">ggbeeswarm</td>
+<td align="left">0.6.0</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="odd">
+<td align="left">ggplot2</td>
+<td align="left">3.3.5</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="even">
+<td align="left">jsonlite</td>
+<td align="left">1.7.2</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="odd">
+<td align="left">knitr</td>
+<td align="left">1.36</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="even">
+<td align="left">lobstr</td>
+<td align="left">1.1.1</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="odd">
+<td align="left">memoise</td>
+<td align="left">2.0.0</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="even">
+<td align="left">png</td>
+<td align="left">0.1-7</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="odd">
+<td align="left">profvis</td>
+<td align="left">0.3.7</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="even">
+<td align="left">Rcpp</td>
+<td align="left">1.0.7</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="odd">
+<td align="left">rlang</td>
+<td align="left">0.4.12</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="even">
+<td align="left">rmarkdown</td>
+<td align="left">2.11</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="odd">
+<td align="left">RSQLite</td>
+<td align="left">2.2.8</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="even">
+<td align="left">scales</td>
+<td align="left">1.1.1</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="odd">
+<td align="left">sessioninfo</td>
+<td align="left">1.1.1</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="even">
+<td align="left">sloop</td>
+<td align="left">1.0.1</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="odd">
+<td align="left">testthat</td>
+<td align="left">3.1.0</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="even">
+<td align="left">tibble</td>
+<td align="left">3.1.5</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="odd">
+<td align="left">tidyr</td>
+<td align="left">1.1.4</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="even">
+<td align="left">vctrs</td>
+<td align="left">0.3.8</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="odd">
+<td align="left">xml2</td>
+<td align="left">1.3.2</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+<tr class="even">
+<td align="left">zeallot</td>
+<td align="left">0.1.0</td>
+<td align="left">CRAN (R 4.0.2)</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+
+
+
+<h3>参考文献</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-SICP" class="csl-entry">
+<p>Abelson, Harold, Gerald Jay Sussman, and Julie Sussman. 1996. <em>Structure and Interpretation of Computer Programs</em>. MIT Press. <a href="https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html">https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html</a>.</p>
+</div>
+<div id="ref-pragprog" class="csl-entry">
+<p>Hunt, Andrew, and David Thomas. 1990. <em>The Pragmatic Programmer</em>. Addison Wesley.</p>
+</div>
+<div id="ref-ctmcp" class="csl-entry">
+<p>Van-Roy, Peter, and Seif Haridi. 2004. <em>Concepts, Techniques, and Models of Computer Programming</em>. MIT press.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="author.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="foundation-intro.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>第 2 章 对象名与对象值 | R语言高级程序设计</title>
+  <meta name="description" content="《Advanced R》中文版" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="第 2 章 对象名与对象值 | R语言高级程序设计" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="《Advanced R》中文版" />
+  <meta name="github-repo" content="skyrealman/adv-r-cn" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="第 2 章 对象名与对象值 | R语言高级程序设计" />
+  
+  <meta name="twitter:description" content="《Advanced R》中文版" />
+  
+
+<meta name="author" content="宋震" />
+
+
+<meta name="date" content="2021-10-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="foundation-intro.html"/>
+<link rel="next" href="vectors.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>前言</a></li>
+<li class="chapter" data-level="" data-path="author.html"><a href="author.html"><i class="fa fa-check"></i>译者简介</a>
+<ul>
+<li class="chapter" data-level="" data-path="author.html"><a href="author.html#关于本书"><i class="fa fa-check"></i>关于本书</a></li>
+<li class="chapter" data-level="" data-path="author.html"><a href="author.html#关于环境"><i class="fa fa-check"></i>关于环境</a></li>
+<li class="chapter" data-level="" data-path="author.html"><a href="author.html#致谢"><i class="fa fa-check"></i>致谢</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> 全书概览</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#为什么选择r语言"><i class="fa fa-check"></i><b>1.1</b> 为什么选择R语言</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#本书的读者范围"><i class="fa fa-check"></i><b>1.2</b> 本书的读者范围</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#您将从本书中学到什么"><i class="fa fa-check"></i><b>1.3</b> 您将从本书中学到什么</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#您无法从本书中学到的内容"><i class="fa fa-check"></i><b>1.4</b> 您无法从本书中学到的内容</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#基础技能"><i class="fa fa-check"></i><b>1.5</b> 基础技能</a></li>
+<li class="chapter" data-level="1.6" data-path="intro.html"><a href="intro.html#推荐阅读"><i class="fa fa-check"></i><b>1.6</b> 推荐阅读</a></li>
+<li class="chapter" data-level="1.7" data-path="intro.html"><a href="intro.html#获取帮助"><i class="fa fa-check"></i><b>1.7</b> 获取帮助</a></li>
+<li class="chapter" data-level="1.8" data-path="intro.html"><a href="intro.html#致谢-1"><i class="fa fa-check"></i><b>1.8</b> 致谢</a></li>
+<li class="chapter" data-level="1.9" data-path="intro.html"><a href="intro.html#约定"><i class="fa fa-check"></i><b>1.9</b> 约定</a></li>
+<li class="chapter" data-level="1.10" data-path="intro.html"><a href="intro.html#使用的r包"><i class="fa fa-check"></i><b>1.10</b> 使用的R包</a></li>
+</ul></li>
+<li class="part"><span><b>I 基础知识</b></span></li>
+<li class="chapter" data-level="" data-path="foundation-intro.html"><a href="foundation-intro.html"><i class="fa fa-check"></i>基础知识概述</a></li>
+<li class="chapter" data-level="2" data-path="name-and-value.html"><a href="name-and-value.html"><i class="fa fa-check"></i><b>2</b> 对象名与对象值</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="name-and-value.html"><a href="name-and-value.html#概述"><i class="fa fa-check"></i><b>2.1</b> 概述</a>
+<ul>
+<li class="chapter" data-level="" data-path="name-and-value.html"><a href="name-and-value.html#测验"><i class="fa fa-check"></i>测验</a></li>
+<li class="chapter" data-level="" data-path="name-and-value.html"><a href="name-and-value.html#题纲"><i class="fa fa-check"></i>题纲</a></li>
+<li class="chapter" data-level="" data-path="name-and-value.html"><a href="name-and-value.html#先决条件"><i class="fa fa-check"></i>先决条件</a></li>
+<li class="chapter" data-level="" data-path="name-and-value.html"><a href="name-and-value.html#资源"><i class="fa fa-check"></i>资源</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="name-and-value.html"><a href="name-and-value.html#binding-basics"><i class="fa fa-check"></i><b>2.2</b> 数据绑定基础</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="name-and-value.html"><a href="name-and-value.html#non-syntactic"><i class="fa fa-check"></i><b>2.2.1</b> 命名规则</a></li>
+<li class="chapter" data-level="2.2.2" data-path="name-and-value.html"><a href="name-and-value.html#习题"><i class="fa fa-check"></i><b>2.2.2</b> 习题</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="name-and-value.html"><a href="name-and-value.html#copy-on-modify"><i class="fa fa-check"></i><b>2.3</b> 修改时复制（Copy-on-modify）</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="name-and-value.html"><a href="name-and-value.html#tracemem"><i class="fa fa-check"></i><b>2.3.1</b> <code>tracemem()</code></a></li>
+<li class="chapter" data-level="2.3.2" data-path="name-and-value.html"><a href="name-and-value.html#函数调用"><i class="fa fa-check"></i><b>2.3.2</b> 函数调用</a></li>
+<li class="chapter" data-level="2.3.3" data-path="name-and-value.html"><a href="name-and-value.html#lists"><i class="fa fa-check"></i><b>2.3.3</b> 列表</a></li>
+<li class="chapter" data-level="2.3.4" data-path="name-and-value.html"><a href="name-and-value.html#数据框"><i class="fa fa-check"></i><b>2.3.4</b> 数据框</a></li>
+<li class="chapter" data-level="2.3.5" data-path="name-and-value.html"><a href="name-and-value.html#字符向量"><i class="fa fa-check"></i><b>2.3.5</b> 字符向量</a></li>
+<li class="chapter" data-level="2.3.6" data-path="name-and-value.html"><a href="name-and-value.html#习题-1"><i class="fa fa-check"></i><b>2.3.6</b> 习题</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="name-and-value.html"><a href="name-and-value.html#object-size"><i class="fa fa-check"></i><b>2.4</b> 对象大小</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="name-and-value.html"><a href="name-and-value.html#习题-2"><i class="fa fa-check"></i><b>2.4.1</b> 习题</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="name-and-value.html"><a href="name-and-value.html#modify-on-place"><i class="fa fa-check"></i><b>2.5</b> 原地修改（Modify-on-place）</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="name-and-value.html"><a href="name-and-value.html#single-binding"><i class="fa fa-check"></i><b>2.5.1</b> 单一绑定对象</a></li>
+<li class="chapter" data-level="2.5.2" data-path="name-and-value.html"><a href="name-and-value.html#env-modify"><i class="fa fa-check"></i><b>2.5.2</b> 环境</a></li>
+<li class="chapter" data-level="2.5.3" data-path="name-and-value.html"><a href="name-and-value.html#习题-3"><i class="fa fa-check"></i><b>2.5.3</b> 习题</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="name-and-value.html"><a href="name-and-value.html#gc"><i class="fa fa-check"></i><b>2.6</b> 对象解绑与垃圾收集</a></li>
+<li class="chapter" data-level="2.7" data-path="name-and-value.html"><a href="name-and-value.html#name-and-value-answers"><i class="fa fa-check"></i><b>2.7</b> 测试题答案</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="vectors.html"><a href="vectors.html"><i class="fa fa-check"></i><b>3</b> 向量</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="vectors.html"><a href="vectors.html#概述-1"><i class="fa fa-check"></i><b>3.1</b> 概述</a>
+<ul>
+<li class="chapter" data-level="" data-path="vectors.html"><a href="vectors.html#测试"><i class="fa fa-check"></i>测试</a></li>
+<li class="chapter" data-level="" data-path="vectors.html"><a href="vectors.html#题纲-1"><i class="fa fa-check"></i>题纲</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="vectors.html"><a href="vectors.html#atomic-vector"><i class="fa fa-check"></i><b>3.2</b> 原子向量</a></li>
+<li class="chapter" data-level="3.3" data-path="vectors.html"><a href="vectors.html#attribute"><i class="fa fa-check"></i><b>3.3</b> 属性</a></li>
+<li class="chapter" data-level="3.4" data-path="vectors.html"><a href="vectors.html#s3-atomic-vector"><i class="fa fa-check"></i><b>3.4</b> S3原子向量</a></li>
+<li class="chapter" data-level="3.5" data-path="vectors.html"><a href="vectors.html#list"><i class="fa fa-check"></i><b>3.5</b> 列表</a></li>
+<li class="chapter" data-level="3.6" data-path="vectors.html"><a href="vectors.html#dataframe-and-tibble"><i class="fa fa-check"></i><b>3.6</b> 数据框和tibble</a></li>
+<li class="chapter" data-level="3.7" data-path="vectors.html"><a href="vectors.html#null"><i class="fa fa-check"></i><b>3.7</b> NULL</a></li>
+<li class="chapter" data-level="3.8" data-path="vectors.html"><a href="vectors.html#vector-quiz-answer"><i class="fa fa-check"></i><b>3.8</b> 测试题答案</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="subsetting.html"><a href="subsetting.html"><i class="fa fa-check"></i><b>4</b> 子集</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="subsetting.html"><a href="subsetting.html#简介"><i class="fa fa-check"></i><b>4.1</b> 简介</a></li>
+<li class="chapter" data-level="4.2" data-path="subsetting.html"><a href="subsetting.html#subset-multiple"><i class="fa fa-check"></i><b>4.2</b> 选择多个元素</a></li>
+<li class="chapter" data-level="4.3" data-path="subsetting.html"><a href="subsetting.html#subset-single"><i class="fa fa-check"></i><b>4.3</b> 选择单个元素</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="control-flow.html"><a href="control-flow.html"><i class="fa fa-check"></i><b>5</b> 控制流</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="control-flow.html"><a href="control-flow.html#张老爷子"><i class="fa fa-check"></i><b>5.1</b> 张老爷子</a></li>
+<li class="chapter" data-level="5.2" data-path="control-flow.html"><a href="control-flow.html#彭大将领"><i class="fa fa-check"></i><b>5.2</b> 彭大将领</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>6</b> 函数</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="functions.html"><a href="functions.html#简介-1"><i class="fa fa-check"></i><b>6.1</b> 简介</a></li>
+<li class="chapter" data-level="6.2" data-path="functions.html"><a href="functions.html#function-composition"><i class="fa fa-check"></i><b>6.2</b> 函数组合</a></li>
+<li class="chapter" data-level="6.3" data-path="functions.html"><a href="functions.html#function-form"><i class="fa fa-check"></i><b>6.3</b> 函数类型</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="environments.html"><a href="environments.html"><i class="fa fa-check"></i><b>7</b> 环境</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="environments.html"><a href="environments.html#简介-2"><i class="fa fa-check"></i><b>7.1</b> 简介</a></li>
+<li class="chapter" data-level="7.2" data-path="environments.html"><a href="environments.html#基础环境"><i class="fa fa-check"></i><b>7.2</b> 基础环境</a></li>
+<li class="chapter" data-level="7.3" data-path="environments.html"><a href="environments.html#在环境上递归"><i class="fa fa-check"></i><b>7.3</b> 在环境上递归</a></li>
+<li class="chapter" data-level="7.4" data-path="environments.html"><a href="environments.html#special-environments"><i class="fa fa-check"></i><b>7.4</b> 特殊环境</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="environments.html"><a href="environments.html#package-environment-and-search-path"><i class="fa fa-check"></i><b>7.4.1</b> 包环境与搜索路径</a></li>
+<li class="chapter" data-level="7.4.2" data-path="environments.html"><a href="environments.html#function-environment"><i class="fa fa-check"></i><b>7.4.2</b> 函数环境</a></li>
+<li class="chapter" data-level="7.4.3" data-path="environments.html"><a href="environments.html#namespace"><i class="fa fa-check"></i><b>7.4.3</b> 命名空间</a></li>
+<li class="chapter" data-level="7.4.4" data-path="environments.html"><a href="environments.html#execution-environment"><i class="fa fa-check"></i><b>7.4.4</b> 执行环境</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="environments.html"><a href="environments.html#call-stack"><i class="fa fa-check"></i><b>7.5</b> 堆栈调用</a></li>
+<li class="chapter" data-level="7.6" data-path="environments.html"><a href="environments.html#as-data-structure"><i class="fa fa-check"></i><b>7.6</b> 作为数据结构</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="conditions.html"><a href="conditions.html"><i class="fa fa-check"></i><b>8</b> 条件</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="conditions.html"><a href="conditions.html#custom-conditions"><i class="fa fa-check"></i><b>8.1</b> 自定义条件</a></li>
+</ul></li>
+<li class="part"><span><b>II 函数式编程</b></span></li>
+<li class="chapter" data-level="" data-path="fp-intro.html"><a href="fp-intro.html"><i class="fa fa-check"></i>函数式编程概述</a></li>
+<li class="chapter" data-level="9" data-path="functionals.html"><a href="functionals.html"><i class="fa fa-check"></i><b>9</b> 泛型函数</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="functionals.html"><a href="functionals.html#张老爷子-1"><i class="fa fa-check"></i><b>9.1</b> 张老爷子</a></li>
+<li class="chapter" data-level="9.2" data-path="functionals.html"><a href="functionals.html#彭大将领-1"><i class="fa fa-check"></i><b>9.2</b> 彭大将领</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="function-factories.html"><a href="function-factories.html"><i class="fa fa-check"></i><b>10</b> 函数工厂</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="function-factories.html"><a href="function-factories.html#function-intro"><i class="fa fa-check"></i><b>10.1</b> 简介</a></li>
+<li class="chapter" data-level="10.2" data-path="function-factories.html"><a href="function-factories.html#factory-fundamentals"><i class="fa fa-check"></i><b>10.2</b> 函数工厂基础</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="function-factories.html"><a href="function-factories.html#function-environments"><i class="fa fa-check"></i><b>10.2.1</b> 环境</a></li>
+<li class="chapter" data-level="10.2.2" data-path="function-factories.html"><a href="function-factories.html#diagram-conventions"><i class="fa fa-check"></i><b>10.2.2</b> 图表约定</a></li>
+<li class="chapter" data-level="10.2.3" data-path="function-factories.html"><a href="function-factories.html#forcing-evaluation"><i class="fa fa-check"></i><b>10.2.3</b> 强制评估</a></li>
+<li class="chapter" data-level="10.2.4" data-path="function-factories.html"><a href="function-factories.html#stateful-functions"><i class="fa fa-check"></i><b>10.2.4</b> 有状态函数</a></li>
+<li class="chapter" data-level="10.2.5" data-path="function-factories.html"><a href="function-factories.html#function-garbage-collection"><i class="fa fa-check"></i><b>10.2.5</b> 垃圾收集</a></li>
+<li class="chapter" data-level="10.2.6" data-path="function-factories.html"><a href="function-factories.html#习题-4"><i class="fa fa-check"></i><b>10.2.6</b> 习题</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="function-factories.html"><a href="function-factories.html#图形工厂"><i class="fa fa-check"></i><b>10.3</b> 图形工厂</a></li>
+<li class="chapter" data-level="10.4" data-path="function-factories.html"><a href="function-factories.html#统计工厂"><i class="fa fa-check"></i><b>10.4</b> 统计工厂</a></li>
+<li class="chapter" data-level="10.5" data-path="function-factories.html"><a href="function-factories.html#函数工厂与泛函"><i class="fa fa-check"></i><b>10.5</b> 函数工厂与泛函</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="function-operators.html"><a href="function-operators.html"><i class="fa fa-check"></i><b>11</b> 函数运算符</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="function-operators.html"><a href="function-operators.html#张老爷子-2"><i class="fa fa-check"></i><b>11.1</b> 张老爷子</a></li>
+<li class="chapter" data-level="11.2" data-path="function-operators.html"><a href="function-operators.html#彭大将领-2"><i class="fa fa-check"></i><b>11.2</b> 彭大将领</a></li>
+</ul></li>
+<li class="part"><span><b>III 面向对象编程</b></span></li>
+<li class="chapter" data-level="" data-path="oo-intro.html"><a href="oo-intro.html"><i class="fa fa-check"></i>面向对象编程概述</a></li>
+<li class="chapter" data-level="12" data-path="base-types.html"><a href="base-types.html"><i class="fa fa-check"></i><b>12</b> 基础类型</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="base-types.html"><a href="base-types.html#张老爷子-3"><i class="fa fa-check"></i><b>12.1</b> 张老爷子</a></li>
+<li class="chapter" data-level="12.2" data-path="base-types.html"><a href="base-types.html#彭大将领-3"><i class="fa fa-check"></i><b>12.2</b> 彭大将领</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="s3.html"><a href="s3.html"><i class="fa fa-check"></i><b>13</b> S3对象系统</a></li>
+<li class="chapter" data-level="14" data-path="r6.html"><a href="r6.html"><i class="fa fa-check"></i><b>14</b> R6对象系统</a></li>
+<li class="chapter" data-level="15" data-path="s4.html"><a href="s4.html"><i class="fa fa-check"></i><b>15</b> S4对象系统</a></li>
+<li class="chapter" data-level="16" data-path="trade-offs.html"><a href="trade-offs.html"><i class="fa fa-check"></i><b>16</b> 对比分析</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="trade-offs.html"><a href="trade-offs.html#简介-3"><i class="fa fa-check"></i><b>16.1</b> 简介</a></li>
+<li class="chapter" data-level="16.2" data-path="trade-offs.html"><a href="trade-offs.html#彭大将领-4"><i class="fa fa-check"></i><b>16.2</b> 彭大将领</a></li>
+</ul></li>
+<li class="part"><span><b>IV 元编程</b></span></li>
+<li class="chapter" data-level="" data-path="mp-intro.html"><a href="mp-intro.html"><i class="fa fa-check"></i>元编程概述</a></li>
+<li class="chapter" data-level="17" data-path="bigpicture.html"><a href="bigpicture.html"><i class="fa fa-check"></i><b>17</b> 全局</a></li>
+<li class="chapter" data-level="18" data-path="expressions.html"><a href="expressions.html"><i class="fa fa-check"></i><b>18</b> 表达式</a></li>
+<li class="chapter" data-level="19" data-path="quasi.html"><a href="quasi.html"><i class="fa fa-check"></i><b>19</b> 准引用</a></li>
+<li class="chapter" data-level="20" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>20</b> 评估</a></li>
+<li class="chapter" data-level="21" data-path="translating.html"><a href="translating.html"><i class="fa fa-check"></i><b>21</b> R代码转换</a></li>
+<li class="part"><span><b>V 编程技巧</b></span></li>
+<li class="chapter" data-level="" data-path="tech-intro.html"><a href="tech-intro.html"><i class="fa fa-check"></i>编程技巧概述</a></li>
+<li class="chapter" data-level="22" data-path="debugging.html"><a href="debugging.html"><i class="fa fa-check"></i><b>22</b> 代码调试</a></li>
+<li class="chapter" data-level="23" data-path="measuring.html"><a href="measuring.html"><i class="fa fa-check"></i><b>23</b> 性能度量</a></li>
+<li class="chapter" data-level="24" data-path="improving.html"><a href="improving.html"><i class="fa fa-check"></i><b>24</b> 性能改进</a></li>
+<li class="chapter" data-level="25" data-path="rewriting.html"><a href="rewriting.html"><i class="fa fa-check"></i><b>25</b> 在C++中重写R代码</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>参考文献</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R语言高级程序设计</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="name-and-value" class="section level1" number="2">
+<h1><span class="header-section-number">第 2 章</span> 对象名与对象值</h1>
+<div id="概述" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> 概述</h2>
+<p>在R中，了解对象与其名称之间的区别非常重要，这样可以帮助您：</p>
+<ul>
+<li>更准确地预测代码的性能和内存使用情况。</li>
+<li>通过避免意外复制来编写更快的代码，这是慢代码的主要来源。</li>
+<li>更好地理解 R 的函数式编程工具。</li>
+</ul>
+<p>本章的目标是帮助您理解对象名称和值之间的区别，以及 R 何时复制对象。</p>
+<div id="测验" class="section level3 unnumbered">
+<h3>测验</h3>
+<p>回答以下问题，看看您是否可以通过本章。您可以在本章末尾的第 <a href="name-and-value.html#name-and-value-answers">2.7</a> 节中找到答案。</p>
+<ol style="list-style-type: decimal">
+<li>给定以下数据框，如何创建一个名为“3”的新列，其中包含 <code>1</code> 和 <code>2</code> 的总和？ 您只能使用 <code>$</code>，而不能使用 <code>[[</code>。 是什么让 <code>1</code>、<code>2</code> 和 <code>3</code> 无法直接作为变量名？</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="name-and-value.html#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">runif</span>(<span class="dv">3</span>), <span class="fu">runif</span>(<span class="dv">3</span>))</span>
+<span id="cb3-2"><a href="name-and-value.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>在下列代码中，<code>y</code>占据了多少内存？</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="name-and-value.html#cb4-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="fl">1e6</span>)</span>
+<span id="cb4-2"><a href="name-and-value.html#cb4-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">list</span>(x, x, x)</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>在下面的例子中，变量<code>a</code>在哪一行被复制？</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="name-and-value.html#cb5-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">2</span>)</span>
+<span id="cb5-2"><a href="name-and-value.html#cb5-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> a</span>
+<span id="cb5-3"><a href="name-and-value.html#cb5-3" aria-hidden="true" tabindex="-1"></a>b[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="dv">10</span></span></code></pre></div>
+</div>
+<div id="题纲" class="section level3 unnumbered">
+<h3>题纲</h3>
+<ul>
+<li>第 <a href="name-and-value.html#binding-basics">2.2</a> 节向您介绍了名称和值之间的区别，并讨论了 <code>&lt;-</code> 如何在名称和值之间创建绑定或引用。</li>
+<li>第 <a href="name-and-value.html#copy-on-modify">2.3</a> 节描述了 R 何时进行复制：每当您修改向量时，几乎肯定会创建一个新的、修改过的向量。您将学习如何使用 <code>tracemem()</code> 来确定复制实际发生的时间。然后，您将探索这一能力在函数调用、列表、数据框和字符向量中的具体实现。</li>
+<li>第 <a href="name-and-value.html#object-size">2.4</a> 节探讨了前两节所涉及的对象占用内存量的一些深入问题。 由于您的直觉可能非常错误，并且 <code>utils::object.size()</code>这个方法计算出的结果也不准确，所以您将学习如何使用 <code>lobstr::obj_size()</code>得到正确的结果。</li>
+<li>第 <a href="name-and-value.html#modify-on-place">2.5</a> 节描述了修改时复制的两个重要例外：对于具有单一名称的环境和值，对象实际上是在原地修改的。</li>
+<li>第 <a href="name-and-value.html#gc">2.6</a> 节以讨论垃圾收集器结束本章，它释放不再被名称引用的对象所使用的内存。</li>
+</ul>
+</div>
+<div id="先决条件" class="section level3 unnumbered">
+<h3>先决条件</h3>
+<p>我们将使用<code>lobstr</code>包深入研究R对象的内部实现。</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="name-and-value.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lobstr)</span></code></pre></div>
+</div>
+<div id="资源" class="section level3 unnumbered">
+<h3>资源</h3>
+<p>R内存管理的细节知识并没有记录在某一篇文档里。本章中的大部分信息都是通过仔细阅读各类文档（特别是通过<code>?Memory</code>和<code>?gc</code>来查看）、编写 <em>R扩展</em> <span class="citation">(<a href="#ref-r-exts" role="doc-biblioref">R Core Team 2018b</a>)</span>的<a href="http://cran.r-project.org/doc/manuals/R-exts.html#Profiling-R-code-for-memory-use">内存分析</a>部分和编写 <em>R internals</em><span class="citation">(<a href="#ref-r-ints" role="doc-biblioref">R Core Team 2018a</a>)</span> 的<a href="http://cran.r-project.org/doc/manuals/R-ints.html#SEXPs">SEXPs</a>部分收集而来的。其余的知识我是通过阅读C源代码、进行小实验以及在R-devel上提问来掌握的。文中的任何错误都是由我造成的。</p>
+</div>
+</div>
+<div id="binding-basics" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> 数据绑定基础</h2>
+<p>考虑下列代码：</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="name-and-value.html#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span></code></pre></div>
+<p>这句代码很容易被理解为：创建了一个名为’x’的对象，其中包含1，2，3三个值。很不幸，这种简化的表述会造成我们对R在背后所做的事情理解不深，更确切的说，这段代码做了两件事情：</p>
+<ul>
+<li>创建了一个值向量的对象，<code>c(1, 2, 3)</code></li>
+<li>将这个对象绑定在一个对象名<code>x</code>上</li>
+</ul>
+<p>换句话说，创建一个对象或者对象的值，本身是没有名称的；而对象名称往往都绑定了一个值在上面。</p>
+<p>为了进一步讲述这两者之间的区别，我绘制了如下图表：</p>
+<p><img src="diagrams/name-and-value/binding-1.png" width="160" style="display: block; margin: auto;" /></p>
+<p>x代表对象名，被一个圆角矩形包裹，它有一个箭头指向（绑定或引用）对象值，即向量c(1, 2, 3)。箭头的方向与赋值号相反：<code>&lt;-</code>创建了一个右侧的对象值与左侧的对象名之间的绑定</p>
+<p>因此，可以将名称视为对值的引用。例如，如果运行下列代码，将不会获得对象c(1, 2, 3)的另一个副本，而是获得现有对象的另一个绑定。</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="name-and-value.html#cb8-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x</span></code></pre></div>
+<p><img src="diagrams/name-and-value/binding-2.png" width="170" style="display: block; margin: auto;" /></p>
+<p>您可能已经注意到，<code>c(1, 2, 3)</code>有一个标签<code>0x74b</code>，虽然向量没有名称，但我偶尔也需要不依赖名称而直接使用对象。为了实现这一点，通常我使用唯一标识符标记对象值。这些标识符有一种特殊的形式，看起来像对象的内存“地址”，即对象在内存中存储的位置。但是因为每次运行代码时实际的内存地址都会发生变化，所以我们使用这些标识符来代替。</p>
+<p>可以使用<code>lobstr::obj_addr()</code>访问对象标识符，这样您可以看到<code>x</code>和<code>y</code>都指向相同的标识符。</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="name-and-value.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(x)</span>
+<span id="cb9-2"><a href="name-and-value.html#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;0x43663e8&quot;</span></span>
+<span id="cb9-3"><a href="name-and-value.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_addr</span>(y)</span>
+<span id="cb9-4"><a href="name-and-value.html#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;0x43663e8&quot;</span></span></code></pre></div>
+<p>这些标识符很长，每次重启R的时候都会发生变化。</p>
+<p>了解对象名称和值之间的区别可能需要一些时间，但是理解这一点对于函数式编程非常有用，因为函数在不同的上下文中可以有不同的名称。</p>
+<div id="non-syntactic" class="section level3" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> 命名规则</h3>
+<p>R对于对象的命名规则有着严格的规定，<strong>合法的名称</strong> 必须由字母<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>、数字、<code>.</code>和<code>_</code>构成，但不能以<code>_</code>和数字开头。此外，您不能使用任何<strong>保留字</strong>，如<code>TRUE</code>，<code>NULL</code>，<code>if</code>，<code>function</code>（通过<code>?Reserved</code>查看详细列表）。不遵循这些命名规则的名称是非法名称，如果您尝试使用它们，系统将报错。</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="name-and-value.html#cb10-1" aria-hidden="true" tabindex="-1"></a>_abc <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb10-2"><a href="name-and-value.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error: unexpected input in &quot;_&quot;</span></span>
+<span id="cb10-3"><a href="name-and-value.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb10-4"><a href="name-and-value.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error: unexpected assignment in &quot;if &lt;-&quot;</span></span></code></pre></div>
+<p>通过为对象名增加反引号，可以破除上述命名规则，使用任何对象名。</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="name-and-value.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">_abc</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb11-2"><a href="name-and-value.html#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">_abc</span><span class="st">`</span></span>
+<span id="cb11-3"><a href="name-and-value.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span>
+<span id="cb11-4"><a href="name-and-value.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">if</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb11-5"><a href="name-and-value.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="st">`</span><span class="at">if</span><span class="st">`</span></span>
+<span id="cb11-6"><a href="name-and-value.html#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 10</span></span></code></pre></div>
+<p>虽然您不太可能故意创建这些疯狂的名称，但您需要了解这些疯狂的名称是如何工作的，因为您会遇到它们，最常见的情况是在加载在R之外创建的数据时。</p>
+<div class="sidebar">
+<p>您也可以使用单引号或双引号（例如<code>“_abc” &lt;- 1</code>）而不是反引号来创建非语法的对象名，但您不应该这样做，因为您可能会使用不同的语法来获取对象值，况且赋值箭头的左侧使用字符串的能力是一个在反引号出现之前的历史产物。</p>
+</div>
+</div>
+<div id="习题" class="section level3" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> 习题</h3>
+<ol style="list-style-type: decimal">
+<li>请解释下列代码中<code>a</code>, <code>b</code>, <code>c</code>, <code>d</code>之间的关系。</li>
+</ol>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="name-and-value.html#cb12-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb12-2"><a href="name-and-value.html#cb12-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> a</span>
+<span id="cb12-3"><a href="name-and-value.html#cb12-3" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> b</span>
+<span id="cb12-4"><a href="name-and-value.html#cb12-4" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>下面的代码以多种方式访问<code>mean</code>函数。它们是否都指向相同的底层函数对象？用<code>lobstr::obj_addr()</code>验证这一点。</li>
+</ol>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="name-and-value.html#cb13-1" aria-hidden="true" tabindex="-1"></a>mean</span>
+<span id="cb13-2"><a href="name-and-value.html#cb13-2" aria-hidden="true" tabindex="-1"></a>base<span class="sc">::</span>mean</span>
+<span id="cb13-3"><a href="name-and-value.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">get</span>(<span class="st">&quot;mean&quot;</span>)</span>
+<span id="cb13-4"><a href="name-and-value.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">evalq</span>(mean)</span>
+<span id="cb13-5"><a href="name-and-value.html#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">match.fun</span>(<span class="st">&quot;mean&quot;</span>)</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li><p>默认情况下，base R中的数据导入函数（如<code>read.csv()</code>）将自动将非法名称转换为合法名称。为什么这可能会带来问题？什么选项允许您抑制这种行为？</p></li>
+<li><p><code>make.names()</code>使用什么规则将非法名称转换为合法名称？</p></li>
+<li><p>我稍微简化了命名规则。为什么<code>.123e1</code>不是一个合法名称？详细信息请阅读<code>?make.names</code>。</p></li>
+</ol>
+</div>
+</div>
+<div id="copy-on-modify" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> 修改时复制（Copy-on-modify）</h2>
+<p>考虑下面的代码，它将<code>x</code>和<code>y</code>绑定到相同的基础对象值，然后再修改<code>y</code><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>。</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="name-and-value.html#cb14-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb14-2"><a href="name-and-value.html#cb14-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x</span>
+<span id="cb14-3"><a href="name-and-value.html#cb14-3" aria-hidden="true" tabindex="-1"></a>y[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb14-4"><a href="name-and-value.html#cb14-4" aria-hidden="true" tabindex="-1"></a>x</span>
+<span id="cb14-5"><a href="name-and-value.html#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1 2 3</span></span></code></pre></div>
+<p>修改<code>y</code>显然没有修改<code>x</code>，但<code>x</code>与<code>y</code>绑定了同一个对象，那么修改到底发生了什么？虽然与<code>y</code>关联的值发生了变化，但原始对象没有发生变化，相反，R创建了一个新对象<code>0xcd2</code>，它是<code>0x74b</code>对象的副本，将它的值发生改变后重新绑定至<code>y</code>。</p>
+<p><img src="diagrams/name-and-value/binding-3.png" width="160" style="display: block; margin: auto;" /></p>
+<p>这种行为被称作<strong>修改时复制</strong>，理解它会从根本上提高您对R代码的感觉，通常我们会把这种行为描述为R对象是<strong>不可变的</strong>，但是我通常会避免使用该术语，因为修改时复制的特性有几个非常重要的例外，我将在第<a href="name-and-value.html#modify-on-place">2.5</a>节中介绍。</p>
+<p>当以交互方式探索“修改时复制”的行为时，请注意您将在 RStudio 中获得不同的结果，那是因为环境面板必须引用每个对象才能显示有关它的信息。这会让您对交互式探索产生误判，但不会影响函数内部的代码，因此不会影响数据分析期间的性能。对于实验，我建议直接从终端运行 R，或者使用 RMarkdown（就像本书一样）。</p>
+<div id="tracemem" class="section level3" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> <code>tracemem()</code></h3>
+<p>您可以使用<code>base::tracemem()</code>函数查看对象何时被复制，一旦您用一个对象调用这个函数，您会得到这个对象的当前地址：</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="name-and-value.html#cb15-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb15-2"><a href="name-and-value.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">tracemem</span>(x), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb15-3"><a href="name-and-value.html#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;0x7f80c0e0ffc8&gt;</span></span></code></pre></div>
+<p>从这时起，无论何时复制该对象，<code>tracemem()</code> 都会打印一条消息，告诉您复制了哪个对象、它的新地址以及修改时复制的调用序列：</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="name-and-value.html#cb16-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x</span>
+<span id="cb16-2"><a href="name-and-value.html#cb16-2" aria-hidden="true" tabindex="-1"></a>y[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> 4L</span>
+<span id="cb16-3"><a href="name-and-value.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x7f80c0e0ffc8 -&gt; 0x7f80c4427f40]: </span></span></code></pre></div>
+<p>如果您再次修改<code>y</code>，它将不会被复制。这是因为新对象现在只有一个绑定到它的对象名，所以R使用了<strong>原地修改</strong>进行优化，我们将在<a href="name-and-value.html#modify-on-place">2.5</a>节中详细讨论。</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="name-and-value.html#cb17-1" aria-hidden="true" tabindex="-1"></a>y[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> 5L</span>
+<span id="cb17-2"><a href="name-and-value.html#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="name-and-value.html#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">untracemem</span>(x)</span></code></pre></div>
+<p><code>untracemem()</code>与<code>tracemem()</code>相反，它关闭对对象的追踪。</p>
+</div>
+<div id="函数调用" class="section level3" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> 函数调用</h3>
+<p>修改时复制的相关规则也适用于函数调用，以下列代码为例：</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="name-and-value.html#cb18-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(a) {</span>
+<span id="cb18-2"><a href="name-and-value.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  a</span>
+<span id="cb18-3"><a href="name-and-value.html#cb18-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-4"><a href="name-and-value.html#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="name-and-value.html#cb18-5" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb18-6"><a href="name-and-value.html#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">tracemem</span>(x), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb18-7"><a href="name-and-value.html#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;0x72ab6b8&gt;</span></span>
+<span id="cb18-8"><a href="name-and-value.html#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="name-and-value.html#cb18-9" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">f</span>(x)</span>
+<span id="cb18-10"><a href="name-and-value.html#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co"># there&#39;s no copy here!</span></span>
+<span id="cb18-11"><a href="name-and-value.html#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="name-and-value.html#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="fu">untracemem</span>(x)</span></code></pre></div>
+<p>当<code>f()</code>运行时，函数内部的变量名<code>a</code>与函数外部变量名<code>x</code>指向相同的值：</p>
+<p><img src="diagrams/name-and-value/binding-f1.png" width="250" style="display: block; margin: auto;" /></p>
+<p>您将在<a href="environments.html#execution-environment">7.4.4</a>节了解更多关于上图的相关知识。简而言之，函数<code>f()</code>由右侧的黄色对象表示，它有一个形参<code>a</code>，当函数运行时，它成为执行环境（灰色矩形框）中的绑定（由黑色虚线表示）。</p>
+<p>一旦<code>f()</code>运行完毕，<code>x</code>和<code>z</code>将指向同一个对象，由于<code>0x74b</code>没有被修改，所以它不会被复制，如果<code>f()</code>确实修改了<code>x</code>，那么R将创建一个新副本，然后<code>z</code>将绑定该对象。</p>
+<p><img src="diagrams/name-and-value/binding-f2.png" width="170" style="display: block; margin: auto;" /></p>
+</div>
+<div id="lists" class="section level3" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> 列表</h3>
+<p>变量名不只能指向向量值，也能指向列表，它与上面的向量非常相似：</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="name-and-value.html#cb19-1" aria-hidden="true" tabindex="-1"></a>l1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span></code></pre></div>
+<p>列表更为复杂，因为它不是存储值的本身，而是存储它们的引用。</p>
+<p><img src="diagrams/name-and-value/list.png" width="189" style="display: block; margin: auto;" /></p>
+<p>这对于修改列表时非常重要：</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="name-and-value.html#cb20-1" aria-hidden="true" tabindex="-1"></a>l2 <span class="ot">&lt;-</span> l1</span></code></pre></div>
+<p><img src="diagrams/name-and-value/l-modify-1.png" width="189" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="name-and-value.html#cb21-1" aria-hidden="true" tabindex="-1"></a>l2[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> <span class="dv">4</span></span></code></pre></div>
+<p><img src="diagrams/name-and-value/l-modify-2.png" width="222" style="display: block; margin: auto;" /></p>
+<p>与向量类似，列表也有修改时复制的特性；原始列表保持不变，R创建一个修改后的副本。然而，这是一个<strong>浅拷贝</strong>：即列表对象及其绑定被复制，但绑定的值没有被复制。与浅拷贝相反的是深拷贝，即每个引用的内容都被复制。在R 3.1.0版本之前，所有的拷贝都是深拷贝。</p>
+<p>要查看跨列表的共享值，请使用<code>lobstr::ref()</code>函数。<code>ref()</code>打印每个对象的内存地址及本地ID，以便您可以轻松发现跨列表的引用值。</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="name-and-value.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ref</span>(l1, l2)</span>
+<span id="cb22-2"><a href="name-and-value.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; █ [1:0x4217278] &lt;list&gt; </span></span>
+<span id="cb22-3"><a href="name-and-value.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─[2:0x49ee9f0] &lt;dbl&gt; </span></span>
+<span id="cb22-4"><a href="name-and-value.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─[3:0x49ee9b8] &lt;dbl&gt; </span></span>
+<span id="cb22-5"><a href="name-and-value.html#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; └─[4:0x49ee980] &lt;dbl&gt; </span></span>
+<span id="cb22-6"><a href="name-and-value.html#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  </span></span>
+<span id="cb22-7"><a href="name-and-value.html#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; █ [5:0x72c2548] &lt;list&gt; </span></span>
+<span id="cb22-8"><a href="name-and-value.html#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─[2:0x49ee9f0] </span></span>
+<span id="cb22-9"><a href="name-and-value.html#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─[3:0x49ee9b8] </span></span>
+<span id="cb22-10"><a href="name-and-value.html#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; └─[6:0x75e20e0] &lt;dbl&gt;</span></span></code></pre></div>
+</div>
+<div id="数据框" class="section level3" number="2.3.4">
+<h3><span class="header-section-number">2.3.4</span> 数据框</h3>
+<p>数据框是向量列表，因此在修改数据框时，修改时复制的特性会产生重要影响。以这个数据框为例：</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="name-and-value.html#cb23-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">6</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>))</span></code></pre></div>
+<p><img src="diagrams/name-and-value/dataframe.png" width="165" style="display: block; margin: auto;" /></p>
+<p>如果修改了一列，只有<em>那一列</em>发生了修改时复制，其他列仍将指向其原始的引用：</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="name-and-value.html#cb24-1" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> d1</span>
+<span id="cb24-2"><a href="name-and-value.html#cb24-2" aria-hidden="true" tabindex="-1"></a>d2[, <span class="dv">2</span>] <span class="ot">&lt;-</span> d2[, <span class="dv">2</span>] <span class="sc">*</span> <span class="dv">2</span></span></code></pre></div>
+<p><img src="diagrams/name-and-value/d-modify-c.png" width="212" style="display: block; margin: auto;" /></p>
+<p>如果修改了一行，每列值都被修改，这就意味着每列值被发生了修改时复制：</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="name-and-value.html#cb25-1" aria-hidden="true" tabindex="-1"></a>d3 <span class="ot">&lt;-</span> d1</span>
+<span id="cb25-2"><a href="name-and-value.html#cb25-2" aria-hidden="true" tabindex="-1"></a>d3[<span class="dv">1</span>, ] <span class="ot">&lt;-</span> d3[<span class="dv">1</span>, ] <span class="sc">*</span> <span class="dv">3</span></span></code></pre></div>
+<p><img src="diagrams/name-and-value/d-modify-r.png" width="326" style="display: block; margin: auto;" /></p>
+</div>
+<div id="字符向量" class="section level3" number="2.3.5">
+<h3><span class="header-section-number">2.3.5</span> 字符向量</h3>
+<p>R语言最后一个使用引用的地方是字符向量<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>，我通常用如下的方式表达字符向量：</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="name-and-value.html#cb26-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;abc&quot;</span>, <span class="st">&quot;d&quot;</span>)</span></code></pre></div>
+<p><img src="diagrams/name-and-value/character.png" width="241" style="display: block; margin: auto;" /></p>
+<p>但这只是示意，事实上R使用一个<strong>全局字符串池</strong>，字符向量中的每个元素都是指向池中唯一字符串的指针:</p>
+<p><img src="diagrams/name-and-value/character-2.png" width="250" style="display: block; margin: auto;" /></p>
+<p>您可通过调用<code>character</code>参数设置为<code>TRUE</code>的<code>ref()</code>函数来显示这些引用。</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="name-and-value.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ref</span>(x, <span class="at">character =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb27-2"><a href="name-and-value.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; █ [1:0x71c0af8] &lt;chr&gt; </span></span>
+<span id="cb27-3"><a href="name-and-value.html#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─[2:0x10b3e20] &lt;string: &quot;a&quot;&gt; </span></span>
+<span id="cb27-4"><a href="name-and-value.html#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─[2:0x10b3e20] </span></span>
+<span id="cb27-5"><a href="name-and-value.html#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─[3:0x8558770] &lt;string: &quot;abc&quot;&gt; </span></span>
+<span id="cb27-6"><a href="name-and-value.html#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; └─[4:0x1274688] &lt;string: &quot;d&quot;&gt;</span></span></code></pre></div>
+<p>这种设计对于字符向量使用的内存量有很大的影响，但在其它方面无关紧要，因此在本书的后续章节，我在画图的时候依然会把字符串画在向量内部。</p>
+</div>
+<div id="习题-1" class="section level3" number="2.3.6">
+<h3><span class="header-section-number">2.3.6</span> 习题</h3>
+<ol style="list-style-type: decimal">
+<li><p>为什么运行<code>tracemem(1:10)</code>没有意义？</p></li>
+<li><p>解释一下为何下列代码运行<code>tracemem(x)</code>后出现两条拷贝信息？提示：认真查看这个代码与前面章节中的代码不同之处。</p></li>
+</ol>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="name-and-value.html#cb28-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(1L, 2L, 3L)</span>
+<span id="cb28-2"><a href="name-and-value.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tracemem</span>(x)</span>
+<span id="cb28-3"><a href="name-and-value.html#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="name-and-value.html#cb28-4" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="dv">4</span></span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>绘制以下对象之间的关系图。</li>
+</ol>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="name-and-value.html#cb29-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb29-2"><a href="name-and-value.html#cb29-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">list</span>(a, a)</span>
+<span id="cb29-3"><a href="name-and-value.html#cb29-3" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">list</span>(b, a, <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>当运行下列代码时，会发生什么？</li>
+</ol>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="name-and-value.html#cb30-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb30-2"><a href="name-and-value.html#cb30-2" aria-hidden="true" tabindex="-1"></a>x[[<span class="dv">2</span>]] <span class="ot">&lt;-</span> x</span></code></pre></div>
+</div>
+</div>
+<div id="object-size" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> 对象大小</h2>
+<p>您可以通过<code>lobstr::obj_size()</code><a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>函数查看一个对象占用了多少内存。</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="name-and-value.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_size</span>(letters)</span>
+<span id="cb31-2"><a href="name-and-value.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1,712 B</span></span>
+<span id="cb31-3"><a href="name-and-value.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_size</span>(ggplot2<span class="sc">::</span>diamonds)</span>
+<span id="cb31-4"><a href="name-and-value.html#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3,456,344 B</span></span></code></pre></div>
+<p>由于列表的元素是对值的引用，因此列表的大小可能比您预期小的多：</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="name-and-value.html#cb32-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="fl">1e6</span>)</span>
+<span id="cb32-2"><a href="name-and-value.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_size</span>(x)</span>
+<span id="cb32-3"><a href="name-and-value.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8,000,048 B</span></span>
+<span id="cb32-4"><a href="name-and-value.html#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="name-and-value.html#cb32-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">list</span>(x, x, x)</span>
+<span id="cb32-6"><a href="name-and-value.html#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_size</span>(y)</span>
+<span id="cb32-7"><a href="name-and-value.html#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8,000,128 B</span></span></code></pre></div>
+<p><code>y</code>只比<code>x</code>大80个字节<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a>，这是一个包含三个元素的空列表的大小：</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="name-and-value.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_size</span>(<span class="fu">list</span>(<span class="cn">NULL</span>, <span class="cn">NULL</span>, <span class="cn">NULL</span>))</span>
+<span id="cb33-2"><a href="name-and-value.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 80 B</span></span></code></pre></div>
+<p>类似的,因为R使用全局字符串池，所以字符向量占用的内存比您预期的少：重复字符串100次并不会使它占用100倍的内存。</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="name-and-value.html#cb34-1" aria-hidden="true" tabindex="-1"></a>banana <span class="ot">&lt;-</span> <span class="st">&quot;bananas bananas bananas&quot;</span></span>
+<span id="cb34-2"><a href="name-and-value.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_size</span>(banana)</span>
+<span id="cb34-3"><a href="name-and-value.html#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 136 B</span></span>
+<span id="cb34-4"><a href="name-and-value.html#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="name-and-value.html#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_size</span>(<span class="fu">rep</span>(banana, <span class="dv">100</span>))</span>
+<span id="cb34-6"><a href="name-and-value.html#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 928 B</span></span></code></pre></div>
+<p>引用的存在使得估计单个对象的大小变得比较困难，如果没有共享值，<code>obj_size(x)</code> + <code>obj_size(y)</code>将等于<code>obj_size(x, y)</code>，如下列代码所示，<code>x</code>与<code>y</code>组合的大小等于<code>y</code>单独的大小。</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="name-and-value.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_size</span>(x, y)</span>
+<span id="cb35-2"><a href="name-and-value.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8,000,128 B</span></span></code></pre></div>
+<p>最后，R 3.5.0之后的版本提供了一个令人兴奋的能力：ALTREP，即<strong>替代形式(alternative representation)</strong>。这种特性允许R采用<code>:</code>这种非常紧凑的方式表示向量，这种方式用存储向量的起始值与结束值代替存储每个值，这意味着不论您的向量有多少个值，它都拥有相同的大小。</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="name-and-value.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_size</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb36-2"><a href="name-and-value.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 680 B</span></span>
+<span id="cb36-3"><a href="name-and-value.html#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_size</span>(<span class="dv">1</span><span class="sc">:</span><span class="fl">1e3</span>)</span>
+<span id="cb36-4"><a href="name-and-value.html#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 680 B</span></span>
+<span id="cb36-5"><a href="name-and-value.html#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_size</span>(<span class="dv">1</span><span class="sc">:</span><span class="fl">1e6</span>)</span>
+<span id="cb36-6"><a href="name-and-value.html#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 680 B</span></span>
+<span id="cb36-7"><a href="name-and-value.html#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_size</span>(<span class="dv">1</span><span class="sc">:</span><span class="fl">1e9</span>)</span>
+<span id="cb36-8"><a href="name-and-value.html#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 680 B</span></span></code></pre></div>
+<div id="习题-2" class="section level3" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> 习题</h3>
+<ol style="list-style-type: decimal">
+<li>在下面的例子中，为何<code>object.size()</code>与<code>object_size()</code>的结果有巨大的差异？请阅读<code>object_size()</code>的文档寻找答案。</li>
+</ol>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="name-and-value.html#cb37-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">list</span>(<span class="fu">runif</span>(<span class="fl">1e4</span>)), <span class="dv">100</span>)</span>
+<span id="cb37-2"><a href="name-and-value.html#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="name-and-value.html#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(y)</span>
+<span id="cb37-4"><a href="name-and-value.html#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8005648 bytes</span></span>
+<span id="cb37-5"><a href="name-and-value.html#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="name-and-value.html#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="fu">object.size</span>(y)</span>
+<span id="cb37-7"><a href="name-and-value.html#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8005648 bytes</span></span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>以下面的列表为例，为什么它的大小与想的不一样？</li>
+</ol>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="name-and-value.html#cb38-1" aria-hidden="true" tabindex="-1"></a>funs <span class="ot">&lt;-</span> <span class="fu">list</span>(mean, sd, var)</span>
+<span id="cb38-2"><a href="name-and-value.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_size</span>(funs)</span>
+<span id="cb38-3"><a href="name-and-value.html#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 17,608 B</span></span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>预测以下代码的输出结果。</li>
+</ol>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="name-and-value.html#cb39-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="fl">1e6</span>)</span>
+<span id="cb39-2"><a href="name-and-value.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_size</span>(a)</span>
+<span id="cb39-3"><a href="name-and-value.html#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="name-and-value.html#cb39-4" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">list</span>(a, a)</span>
+<span id="cb39-5"><a href="name-and-value.html#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_size</span>(b)</span>
+<span id="cb39-6"><a href="name-and-value.html#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_size</span>(a, b)</span>
+<span id="cb39-7"><a href="name-and-value.html#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-8"><a href="name-and-value.html#cb39-8" aria-hidden="true" tabindex="-1"></a>b[[<span class="dv">1</span>]][[<span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb39-9"><a href="name-and-value.html#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_size</span>(b)</span>
+<span id="cb39-10"><a href="name-and-value.html#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_size</span>(a, b)</span>
+<span id="cb39-11"><a href="name-and-value.html#cb39-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-12"><a href="name-and-value.html#cb39-12" aria-hidden="true" tabindex="-1"></a>b[[<span class="dv">2</span>]][[<span class="dv">1</span>]] <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb39-13"><a href="name-and-value.html#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_size</span>(b)</span>
+<span id="cb39-14"><a href="name-and-value.html#cb39-14" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_size</span>(a, b)</span></code></pre></div>
+</div>
+</div>
+<div id="modify-on-place" class="section level2" number="2.5">
+<h2><span class="header-section-number">2.5</span> 原地修改（Modify-on-place）</h2>
+<p>正如我们在上面看到的那样，修改R对象通常会创建一个副本，但这里有两个例外：</p>
+<ul>
+<li>单一绑定对象可获得特殊的性能优化。</li>
+<li>环境是一种特殊类型的对象，它总是在原地修改。</li>
+</ul>
+<div id="single-binding" class="section level3" number="2.5.1">
+<h3><span class="header-section-number">2.5.1</span> 单一绑定对象</h3>
+<p>如果对象只被一个对象名绑定，R将原地修改这个变量：</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="name-and-value.html#cb40-1" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span></code></pre></div>
+<p><img src="diagrams/name-and-value/v-inplace-1.png" width="160" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="name-and-value.html#cb41-1" aria-hidden="true" tabindex="-1"></a>v[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> <span class="dv">4</span></span></code></pre></div>
+<p><img src="diagrams/name-and-value/v-inplace-2.png" width="160" style="display: block; margin: auto;" /></p>
+<p>（请注意对象ID：<code>v</code>始终绑定在同一对象上，<code>0x207</code>。）</p>
+<p>有两个复杂因素使得预测R何时开展性能优化变得有难度：</p>
+<ul>
+<li><p>说到绑定，R目前只能按0，1或多个来计数。这就意味着，假如一个对象拥有2个绑定，当一个消失时，引用计数不会回到1：多个减去1还等于多个。反过来就说明R有时会在不需要的时候进行复制。</p></li>
+<li><p>当您调用绝大多数函数的时候，它都会为对象创建引用，唯一的例外是专门编写的“原始”C函数。这些只能由R的核心开发团队编写，并且主要出现在base包中。</p></li>
+</ul>
+<p>总之，这两种复杂的情况使得预测是否会产生副本变得很难，因此用<code>tracemem()</code>函数来判断是很好的经验。</p>
+<p>让我们通过使用for循环的案例研究来探索其中的微妙之处，for循环在R中是比较慢的，这种慢通常是由于循环的每次迭代都会创建一直副本造成的。考虑下面的代码，经从一个大型数据框的每一列减去一个值：</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="name-and-value.html#cb42-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="fu">runif</span>(<span class="dv">5</span> <span class="sc">*</span> <span class="fl">1e4</span>), <span class="at">ncol =</span> <span class="dv">5</span>))</span>
+<span id="cb42-2"><a href="name-and-value.html#cb42-2" aria-hidden="true" tabindex="-1"></a>medians <span class="ot">&lt;-</span> <span class="fu">vapply</span>(x, median, <span class="fu">numeric</span>(<span class="dv">1</span>))</span>
+<span id="cb42-3"><a href="name-and-value.html#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="name-and-value.html#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(medians)) {</span>
+<span id="cb42-5"><a href="name-and-value.html#cb42-5" aria-hidden="true" tabindex="-1"></a>  x[[i]] <span class="ot">&lt;-</span> x[[i]] <span class="sc">-</span> medians[[i]]</span>
+<span id="cb42-6"><a href="name-and-value.html#cb42-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>这个循环运行的非常慢，因为每次迭代都会复制数据框，您可以使用<code>tracemem()</code>函数来监控运行：</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="name-and-value.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">tracemem</span>(x), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb43-2"><a href="name-and-value.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;0x7f80c429e020&gt; </span></span>
+<span id="cb43-3"><a href="name-and-value.html#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="name-and-value.html#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
+<span id="cb43-5"><a href="name-and-value.html#cb43-5" aria-hidden="true" tabindex="-1"></a>  x[[i]] <span class="ot">&lt;-</span> x[[i]] <span class="sc">-</span> medians[[i]]</span>
+<span id="cb43-6"><a href="name-and-value.html#cb43-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb43-7"><a href="name-and-value.html#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x7f80c429e020 -&gt; 0x7f80c0c144d8]: </span></span>
+<span id="cb43-8"><a href="name-and-value.html#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x7f80c0c144d8 -&gt; 0x7f80c0c14540]: [[&lt;-.data.frame [[&lt;- </span></span>
+<span id="cb43-9"><a href="name-and-value.html#cb43-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x7f80c0c14540 -&gt; 0x7f80c0c145a8]: [[&lt;-.data.frame [[&lt;- </span></span>
+<span id="cb43-10"><a href="name-and-value.html#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x7f80c0c145a8 -&gt; 0x7f80c0c14610]: </span></span>
+<span id="cb43-11"><a href="name-and-value.html#cb43-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x7f80c0c14610 -&gt; 0x7f80c0c14678]: [[&lt;-.data.frame [[&lt;- </span></span>
+<span id="cb43-12"><a href="name-and-value.html#cb43-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x7f80c0c14678 -&gt; 0x7f80c0c146e0]: [[&lt;-.data.frame [[&lt;- </span></span>
+<span id="cb43-13"><a href="name-and-value.html#cb43-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x7f80c0c146e0 -&gt; 0x7f80c0c14748]: </span></span>
+<span id="cb43-14"><a href="name-and-value.html#cb43-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x7f80c0c14748 -&gt; 0x7f80c0c147b0]: [[&lt;-.data.frame [[&lt;- </span></span>
+<span id="cb43-15"><a href="name-and-value.html#cb43-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x7f80c0c147b0 -&gt; 0x7f80c0c14818]: [[&lt;-.data.frame [[&lt;- </span></span>
+<span id="cb43-16"><a href="name-and-value.html#cb43-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x7f80c0c14818 -&gt; 0x7f80c0c14880]: </span></span>
+<span id="cb43-17"><a href="name-and-value.html#cb43-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x7f80c0c14880 -&gt; 0x7f80c0c148e8]: [[&lt;-.data.frame [[&lt;- </span></span>
+<span id="cb43-18"><a href="name-and-value.html#cb43-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x7f80c0c148e8 -&gt; 0x7f80c0c14950]: [[&lt;-.data.frame [[&lt;- </span></span>
+<span id="cb43-19"><a href="name-and-value.html#cb43-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x7f80c0c14950 -&gt; 0x7f80c0c149b8]: </span></span>
+<span id="cb43-20"><a href="name-and-value.html#cb43-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x7f80c0c149b8 -&gt; 0x7f80c0c14a20]: [[&lt;-.data.frame [[&lt;- </span></span>
+<span id="cb43-21"><a href="name-and-value.html#cb43-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x7f80c0c14a20 -&gt; 0x7f80c0c14a88]: [[&lt;-.data.frame [[&lt;- </span></span>
+<span id="cb43-22"><a href="name-and-value.html#cb43-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-23"><a href="name-and-value.html#cb43-23" aria-hidden="true" tabindex="-1"></a><span class="fu">untracemem</span>(x)</span></code></pre></div>
+<p>事实上，每次迭代不止复制的一次数据框，也不止是两次，而是三次。<code>[[.data.frame</code>先生成了两个副本，然后又生成了一个<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>，因为<code>[[.data.frame</code>是一个常规函数，它会增加<code>x</code>的引用计数。</p>
+<p>我们可以通过使用列表而不是数据框来减少副本复制的数量，修改列表使用的是内部C函数，因此不会增加引用计数，只生成一个副本：</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="name-and-value.html#cb44-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">as.list</span>(x)</span>
+<span id="cb44-2"><a href="name-and-value.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">tracemem</span>(y), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb44-3"><a href="name-and-value.html#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;0x7f80c5c3de20&gt;</span></span>
+<span id="cb44-4"><a href="name-and-value.html#cb44-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb44-5"><a href="name-and-value.html#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
+<span id="cb44-6"><a href="name-and-value.html#cb44-6" aria-hidden="true" tabindex="-1"></a>  y[[i]] <span class="ot">&lt;-</span> y[[i]] <span class="sc">-</span> medians[[i]]</span>
+<span id="cb44-7"><a href="name-and-value.html#cb44-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb44-8"><a href="name-and-value.html#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; tracemem[0x7f80c5c3de20 -&gt; 0x7f80c48de210]: </span></span></code></pre></div>
+<p>虽然不难发现何时产生了副本，但却很难阻止它。如果您发现自己在使用一些奇异的技巧避免产生复制，那可能是时候用C++重写您的函数了，这些内容我们将在第<a href="rewriting.html#rewriting">25</a>章中讲述。</p>
+</div>
+<div id="env-modify" class="section level3" number="2.5.2">
+<h3><span class="header-section-number">2.5.2</span> 环境</h3>
+<p>您将在第<a href="environments.html#environments">7</a>章学习更多与环境相关的知识，但在这里提及它们十分重要，因为它们的行为与其它对象的行为不同：环境总是在适当的地方进行修改。这种属性有时被成为<strong>引用语义</strong>，因为当您修改环境时，所有这个环境中的所有绑定将继续保持相同的引用。</p>
+<p>如同下列这个绑定到<code>e1</code>和<code>e2</code>的环境：</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="name-and-value.html#cb45-1" aria-hidden="true" tabindex="-1"></a>e1 <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">env</span>(<span class="at">a =</span> <span class="dv">1</span>, <span class="at">b =</span> <span class="dv">2</span>, <span class="at">c =</span> <span class="dv">3</span>)</span>
+<span id="cb45-2"><a href="name-and-value.html#cb45-2" aria-hidden="true" tabindex="-1"></a>e2 <span class="ot">&lt;-</span> e1</span></code></pre></div>
+<p><img src="diagrams/name-and-value/e-modify-1.png" width="184" style="display: block; margin: auto;" /></p>
+<p>如果我们改变了绑定，环境也就地修改。</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="name-and-value.html#cb46-1" aria-hidden="true" tabindex="-1"></a>e1<span class="sc">$</span>c <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb46-2"><a href="name-and-value.html#cb46-2" aria-hidden="true" tabindex="-1"></a>e2<span class="sc">$</span>c</span>
+<span id="cb46-3"><a href="name-and-value.html#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 4</span></span></code></pre></div>
+<p><img src="diagrams/name-and-value/e-modify-2.png" width="184" style="display: block; margin: auto;" /></p>
+<p>这个特性可以用于创建“可记住”先前状态的函数，更多的信息请见<a href="function-factories.html#function-environments">10.2.1</a>。这个特性实现了R6面向对象系统，这将在第<a href="r6.html#r6">14</a>章详细介绍。</p>
+<p>这样做的一个重要结果是环境可以包含自己：</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="name-and-value.html#cb47-1" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">env</span>()</span>
+<span id="cb47-2"><a href="name-and-value.html#cb47-2" aria-hidden="true" tabindex="-1"></a>e<span class="sc">$</span>self <span class="ot">&lt;-</span> e</span>
+<span id="cb47-3"><a href="name-and-value.html#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="name-and-value.html#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ref</span>(e)</span>
+<span id="cb47-5"><a href="name-and-value.html#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; █ [1:0x5916dd8] &lt;env&gt; </span></span>
+<span id="cb47-6"><a href="name-and-value.html#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; └─self = [1:0x5916dd8]</span></span></code></pre></div>
+<p><img src="diagrams/name-and-value/e-self.png" width="142" style="display: block; margin: auto;" /></p>
+<p>这是环境对象唯一的属性。</p>
+</div>
+<div id="习题-3" class="section level3" number="2.5.3">
+<h3><span class="header-section-number">2.5.3</span> 习题</h3>
+<ol style="list-style-type: decimal">
+<li>解释一下为何下列代码没有创建一个循环列表</li>
+</ol>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="name-and-value.html#cb48-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb48-2"><a href="name-and-value.html#cb48-2" aria-hidden="true" tabindex="-1"></a>x[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> x</span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li><p>将上述两个减中位数的方法包装成两个函数，调用<code>bench</code>包比较两个方法的速度。随着列数增加，性能如何变化？</p></li>
+<li><p>如果您尝试在环境中使用<code>tracemem()</code>函数会发生什么？</p></li>
+</ol>
+</div>
+</div>
+<div id="gc" class="section level2" number="2.6">
+<h2><span class="header-section-number">2.6</span> 对象解绑与垃圾收集</h2>
+<p>考虑下列代码：</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="name-and-value.html#cb49-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span></span></code></pre></div>
+<p><img src="diagrams/name-and-value/unbinding-1.png" width="160" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="name-and-value.html#cb50-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">4</span></span></code></pre></div>
+<p><img src="diagrams/name-and-value/unbinding-2.png" width="160" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="name-and-value.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(x)</span></code></pre></div>
+<p><img src="diagrams/name-and-value/unbinding-3.png" width="160" style="display: block; margin: auto;" /></p>
+<p>我们创建了两个对象，但等到代码运行完毕后，没有一个对象绑定到了对象名。这些对象如何被删除？这个工作交给了<strong>垃圾收集器</strong>，简称GC。GC释放那些已经被删除的对象所占用的内存，并在需要时从操作系统请求更多内存。</p>
+<p>R使用<strong>追踪式</strong>垃圾收集器，这意味着它会跟踪可以从全局环境<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>访问的每个对象，以及可从这些对象上访问的所有对象（即可递归搜索的列表与环境中的引用）。垃圾收集器不使用上述原地修改引用计数，虽然垃圾收集器与引用计数是密切相关的，但内部数据结构针对不同用例进行了优化。</p>
+<p>每个R需要更多内存来创建新对象时，垃圾收集器(GC)就会自动运行，从外部来看，基本上没法预测GC何时运行。事实上，你也不应该尝试预测。如果您想知道GC何时运行，请调用<code>gcinfo(TRUE)</code>，GC将在每次运行时向控制台打印一条消息。</p>
+<p>可以通过调用<code>gc()</code>函数来强制垃圾收集，这一点您可以已经在其它地方有所了解，但您永远不需要这么做。调用<code>gc()</code>的唯一原因可能是要求R将内存返回到操作系统，以便其他程序可以使用它，或者是告诉您当前使用了多少内存，这其实是一个额外的作用：</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="name-and-value.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span>
+<span id="cb52-2"><a href="name-and-value.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           used (Mb) gc trigger  (Mb) max used  (Mb)</span></span>
+<span id="cb52-3"><a href="name-and-value.html#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Ncells  855070 45.7    1645301  87.9  1645301  87.9</span></span>
+<span id="cb52-4"><a href="name-and-value.html#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Vcells 4962720 37.9   17010142 129.8 17009272 129.8</span></span></code></pre></div>
+<p><code>lobstr::mem_used()</code>函数是<code>gc()</code>的包装器，用于打印使用字节的总数：</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="name-and-value.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mem_used</span>()</span>
+<span id="cb53-2"><a href="name-and-value.html#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 87,591,776 B</span></span></code></pre></div>
+<p>这个数字与您操作系统显示的可能不一样，主要是由下列三个原因造成的：</p>
+<ol style="list-style-type: decimal">
+<li><p>它包括由R创建的对象，但不包括由R解释器创建的对象。</p></li>
+<li><p>R和操作系统都是惰性的：它们都是到了真正需要的时候才会回收内存。因此R可能会占用内存，因为操作系统还未要求它返回。</p></li>
+<li><p>R统计对象占用的内存，但可能会因为删除的对象而存在空白。这个问题称为内存碎片化。</p></li>
+</ol>
+</div>
+<div id="name-and-value-answers" class="section level2" number="2.7">
+<h2><span class="header-section-number">2.7</span> 测试题答案</h2>
+<ol style="list-style-type: decimal">
+<li>你必须使用反引号<code>`</code>引用非法名称：例如，例如变量<code>1</code>, <code>2</code>, <code>3</code>。</li>
+</ol>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="name-and-value.html#cb54-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">runif</span>(<span class="dv">3</span>), <span class="fu">runif</span>(<span class="dv">3</span>))</span>
+<span id="cb54-2"><a href="name-and-value.html#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb54-3"><a href="name-and-value.html#cb54-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-4"><a href="name-and-value.html#cb54-4" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span><span class="st">`</span><span class="at">3</span><span class="st">`</span> <span class="ot">&lt;-</span> df<span class="sc">$</span><span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="sc">+</span> df<span class="sc">$</span><span class="st">`</span><span class="at">2</span><span class="st">`</span></span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>它大约占用8Mb。</li>
+</ol>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="name-and-value.html#cb55-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="fl">1e6</span>)</span>
+<span id="cb55-2"><a href="name-and-value.html#cb55-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">list</span>(x, x, x)</span>
+<span id="cb55-3"><a href="name-and-value.html#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">obj_size</span>(y)</span>
+<span id="cb55-4"><a href="name-and-value.html#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8,000,128 B</span></span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>当<code>b</code>发生修改时，<code>a</code>会复制。即在<code>b[[1]] &lt;- 10</code>这一行发生复制。</li>
+</ol>
+
+</div>
+</div>
+<h3>参考文献</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-r-ints" class="csl-entry">
+<p>R Core Team. 2018a. <span>“R Internals.”</span> <em>R Foundation for Statistical Computing</em>. <a href="https://cran.r-project.org/doc/manuals/r-devel/R-ints.html">https://cran.r-project.org/doc/manuals/r-devel/R-ints.html</a>.</p>
+</div>
+<div id="ref-r-exts" class="csl-entry">
+<p>R Core Team. 2018b. <span>“Writing <span>R</span> Extensions.”</span> <em>R Foundation for Statistical Computing</em>. <a href="https://cran.r-project.org/doc/manuals/r-devel/R-exts.html">https://cran.r-project.org/doc/manuals/r-devel/R-exts.html</a>.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>另人惊讶的是，字母的组成取决于您计算机的语言环境，这意味着R代码可以在不同计算机上有所不同，而且在一台计算机上工作的文件甚至不能在另一台计算机上解析。应通过尽可能多地使用ASCII字符（即A-Z）来避免这个问题。<a href="name-and-value.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>您可能会惊讶的看到<code>[[</code>符号可以用于获取向量的子集，我们会在<a href="subsetting.html#subset-single">4.3</a>章节详细讨论这个问题，现在您只需要使用<code>[[</code>去获取或者设置单个元素值就好。<a href="name-and-value.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>字符向量其实是字符串向量，不只是单个字符。<a href="name-and-value.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>请注意<code>utils::object.size()</code>函数，它没有考虑共享引用，将导致返回值过大。<a href="name-and-value.html#fnref4" class="footnote-back">↩︎</a></p></li>
+<li id="fn5"><p>如果您运行的是32位的R，您看到的大小将有所不同。<a href="name-and-value.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>这些都是浅拷贝，它们只是复制了每个列的引用，而不是列的内容，其实性能没有那么差，但也不是最好的方法。<a href="name-and-value.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>以及当前调用堆栈上的每个环境。<a href="name-and-value.html#fnref7" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="foundation-intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="vectors.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

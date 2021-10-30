@@ -110,7 +110,7 @@
 |bslib       |0.3.1   |CRAN (R 4.0.2) |
 |dbplyr      |2.1.1   |CRAN (R 4.0.2) |
 |desc        |1.4.0   |CRAN (R 4.0.2) |
-|downlit     |0.2.1   |CRAN (R 4.0.2) |
+|downlit     |0.4.0   |CRAN (R 4.0.2) |
 |dplyr       |1.0.7   |CRAN (R 4.0.2) |
 |ggbeeswarm  |0.6.0   |CRAN (R 4.0.2) |
 |ggplot2     |3.3.5   |CRAN (R 4.0.2) |

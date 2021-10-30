@@ -48,13 +48,119 @@ knitr::include_graphics("diagrams/vectors/summary-tree.png")
 
 ## 原子向量 {#atomic-vector}
 
+原子向量有四种主要类型：逻辑型、整型、双精度型和字符型（包括字符串），整型向量与双精度向量统称数值向量[^numeric]。还有两种罕见的类型：复数型和原始型。我不会深入讨论它们，因为在统计学中很少需要使用复数，同时原始向量一般只有在处理二进制数据时才会使用。
+
+```{r, echo = FALSE, out.width = NULL}
+knitr::include_graphics("diagrams/vectors/summary-tree-atomic.png")
+```
+
+[^numeric]: 这是一个轻微的简化，因为R并没有始终使用“数值”这个词，我们将在\@ref(numeric-type)节中详细介绍。
+
+### 标量 {#scalars}
+
+四种主要类型的原子向量各有一种独特的语法来创建拥有一个值的对象，即标量[^scalar]：
+
+- 逻辑型向量可以用完整形式表示（`TRUE`或者`FALSE`），也可以用简写表示（`T`或`F`）。
+
+- 双精度型向量可以用十进制（`0.1234`）、科学计数法（`1.23e4`）或十六进制（`0xcafe`）来表示。双精度类型有三个由浮点标准定义的特殊值：`-Inf`，`Inf`和`NaN`（非数值）。
+
+- 整型向量的表达方式与双精度类似，但数字后面必须跟`L`[^L-suffix]（`1234L`、`1e4L`、`0xcafeL`），并且不能包含小数。
+
+- 字符串由单引号`'`或者双引号`"`包围，特殊字符需要匹配转义符号`\`。通过`?Quotes`查看更多信息。
+
+[^scalar]: 从技术上讲，R语言没有标量，看起来像标量的对象其实是长度为1的向量。
+
+[^L-suffix]: 使用`L`后缀看起来并不方便，您可能想知道为何会有这样的规范要求。向R向量中添加后缀`L`时，R的整型相当于C语言的长整型，C代码可以使用`L`或者`l`强制整数变为长整数，由于`l`在表现上比较像大写的字母`i`，容易发生混淆，因此R语言中只保留了`L`。
+
+### 使用`c()`函数创建长向量 {#make-long-vectors}
+
+使用`c()`函数可以把多个短向量组合成长向量：
+
+```{r}
+lgl_var <- c(TRUE, FALSE)
+int_var <- c(1L, 6L, 10L)
+dbl_var <- c(1, 2.5, 4.5)
+chr_var <- c("these are", "some strings")
+```
+
+如果传入的是原子向量，`c()`函数也会生成一个新的原子向量，新向量会展平：
+
+```{r}
+c(c(1, 2), c(3, 4))
+```
+
+如果我将向量表达为连接的矩形，那么上面的代码可以绘制如下：
+
+```{r, echo = FALSE, out.width = NULL}
+knitr::include_graphics("diagrams/vectors/atomic.png")
+```
+
+您可以使用`typeof()`[^mode]函数确定向量的类型，使用`length()`函数确定向量的长度
+
+```{r}
+typeof(lgl_var)
+typeof(int_var)
+typeof(dbl_var)
+typeof(chr_var)
+```
+
+[^mode]: 您可能听说过`mode()`函数和`storage.mode()`函数。不要使用它们：它们的存在只是为了与S语言兼容。
+
+### 缺失值 {#missing-values}
+
+### 类型判断与强制转换 {#vector-testing-and-coercion}
+
+### 习题
+
 ## 属性 {#attribute}
+
+### 获取属性与设置属性 {#getting-and-setting}
+
+### 属性名 {#attr-names}
+
+### 维度 {#dimensions}
+
+### 习题
 
 ## S3原子向量 {#s3-atomic-vector}
 
+### 因子型 {#factors}
+
+### 日期型 {#dates}
+
+### 日期时间型 {#datetimes}
+
+### 时间间隔 {#durations}
+
+### 习题
+
 ## 列表 {#list}
 
+### 创建列表 {#creating-list}
+
+### 列表判断与强制转换 {#list-testing-and-coercion}
+
+### 矩阵和数组 {#matrices-and-array}
+
+### 习题
+
 ## 数据框和tibble {#dataframe-and-tibble}
+
+### 创建数据框 {#creating-df}
+
+### 行名 {#row-names}
+
+### 打印数据框 {#printing-df}
+
+### 子集 {#subsetting}
+
+### 数据框判断与强制转换 {#df-testing-and-coercion}
+
+### 列表列 {#list-columns}
+
+### 矩阵和数据框列 {#matrix-and-df-columns}
+
+### 习题
 
 ## NULL {#null}
 

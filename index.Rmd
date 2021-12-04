@@ -37,8 +37,8 @@ knitr::opts_chunk$set(
 )
 
 # 填上你需要用到的包，如 c('ggplot2', 'dplyr')
-lapply(c('ggplot2', 'dplyr'), function(pkg) {
-  if (system.file(package = pkg) == '') install.packages(pkg)
+lapply(c("ggplot2", "dplyr"), function(pkg) {
+  if (system.file(package = pkg) == "") install.packages(pkg)
 })
 ```
 
@@ -86,9 +86,3 @@ R语言相关的基础知识自本书第一版以来没有发生过变化，但�
 - C语言章节被移动到<https://github.com/hadley/r-internals>，随着时间的推移，这将为编写与R的数据结构一起工作的C代码提供指导。
 - 内存章节被删除，其中部分的内容被合并至第\@ref(name-and-value)章，删除了那些看起来很技术化但没有那么重要的内容。
 - R语言的性能章节被删除，这部分内容确实有一些可操作性，但随着R语言的不断发展已经过时。
-
-
-
-
-
-

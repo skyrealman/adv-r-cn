@@ -148,7 +148,6 @@ base::mean
 get("mean")
 evalq(mean)
 match.fun("mean")
-
 ```
 
 3. 默认情况下，base R中的数据导入函数（如`read.csv()`）将自动将非法名称转换为合法名称。为什么这可能会带来问题？什么选项允许您抑制这种行为？
@@ -239,7 +238,7 @@ knitr::include_graphics("diagrams/name-and-value/binding-f1.png")
 knitr::include_graphics("diagrams/name-and-value/binding-f2.png")
 ```
 
-### 列表 {#lists}
+### 列表 {#list-references}
 
 变量名不只能指向向量值，也能指向列表，它与上面的向量非常相似：
 

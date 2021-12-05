@@ -1,4 +1,5 @@
 library(methods)
+library(tidyverse)
 set.seed(1014)
 
 knitr::opts_chunk$set(

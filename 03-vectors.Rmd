@@ -740,12 +740,148 @@ tibble在使用`[`取子集时坚持返回数据框可能会导致一些遗留�
 
 ### 数据框判断与强制转换 {#df-testing-and-coercion}
 
+可以使用`is.data.frame()`函数来检查对象是否为数据框或tibble：
+
+```{r}
+is.data.frame(df1)
+is.data.frame(df2)
+```
+
+当然，上面操作的前提在于您不太关心到底是数据框还是tibble，如果您确定需要知道具体类型，可以使用`is_tibble()`
+
+```{r}
+is_tibble(df1)
+is_tibble(df2)
+```
+
+您可以使用`as.data.frame()`将一个对象强制转换为数据框，或者使用`as_tibble()`转换为tibble。
+
 ### 列表列 {#list-columns}
+
+由于数据框就是向量列表，所以数据框很可能拥有类型为列表的列。这是非常有用的特性，因为列表可以拥有多种类型的对象：也就是说您可以把任何对象放到数据框中。
+您可以把相关对象放在一行中，不论这单个对象有多复杂。相关应用可以参考*R数据科学*一书中“多种模型”章节。(http://r4ds.had.co.nz/many-models.html)
+
+数据框中允许列表列的存在，但您向数据框中添加列表列时需要多做一些额外的工作，比如在生成数据框后把列表赋值进去或者在构建数据框时把列表列用`I()`[^identity]函数封装。
+
+[^identity]: `I()`是identity的简写，通常表示输入应该保持原样，不需要自动转换。
+
+```{r}
+df <- data.frame(x = 1:3)
+df$y <- list(1:2, 1:3, 1:4)
+
+data.frame(
+  x = 1:3,
+  y = I(list(1:2, 1:3, 1:4))
+)
+```
+
+```{r, echo = FALSE}
+knitr::include_graphics("diagrams/vectors/data-frame-list.png")
+```
+
+在tibble中使用列表列比较容易，因为`tibble()`函数本身就可以传入列表且不用做任何转换，同时也会很整洁的打印结果：
+
+```{r}
+tibble(
+  x = 1:3,
+  y = list(1:2, 1:3, 1:4)
+)
+```
 
 ### 矩阵和数据框列 {#matrix-and-df-columns}
 
+只要行数与数据框一致，也可以将矩阵或者数组转为数据框的列。（这需要对数据框的定义稍加扩展，并不是每列的`length()`必须一致，而是`NROW()`值必须一致）。作为列表列，
+你要么在创建数据框后立刻添加这一列，要么用`I()`函数封装。
+
+```{r}
+dfm <- data.frame(
+  x = 1:3 * 10
+)
+dfm$y <- matrix(1:9, nrow = 3)
+dfm$z <- data.frame(a = 3:1, b = letters[1:3], stringsAsFactors = FALSE)
+
+str(dfm)
+```
+
+```{r, echo = FALSE}
+knitr::include_graphics("diagrams/vectors/data-frame-matrix.png")
+```
+
+矩阵和数据框列的打印结果会让人感觉到困惑，很多作用在数据框上的函数会假定所有的列都是向量，因此按行打印时结果会显得很奇怪。
+
+```{r}
+dfm[1,]
+```
+
 ### 习题
+
+1. 您可以使有一个0行的数据框吗？0列可能吗？
+
+```{r}
+df <- data.frame()
+```
+
+2. 当您尝试设置行名不唯一的时候，会发生什么事情？
+
+3. 假如`df`是一个数据框，那么`t(df)`是什么？`t(t(df))`又是什么？做一些实验查看结果，特别是针对不同类型的列开展试验。
+
+```{r}
+df <- data.frame(a = 1:3, b = letters[10:12],
+                 c = seq(as.Date("2004-01-01"), by = "week", length.out = 3),
+                 stringsAsFactors = TRUE)
+t(df)
+t(t(df))
+```
+
+4. 如果将`as.matrix()`函数作用于一个列为不同类型的数据框上，会发生什么？这与函数`data.matrix()`有何不同？
+
+```{r}
+DF <- data.frame(a = 1:3, b = letters[10:12],
+                 c = seq(as.Date("2004-01-01"), by = "week", length.out = 3),
+                 stringsAsFactors = TRUE)
+as.matrix(DF)
+data.matrix(DF[1:2])
+data.matrix(DF)
+```
 
 ## NULL {#vector-null}
 
+最后，我想再讨论一个与向量密切相关的重要的数据结构：`NULL`。`NULL`很特殊，因为它只有唯一的类型，长度只能为0，且不能有任何属性。
+
+```{r, error = TRUE}
+typeof(NULL)
+length(NULL)
+x <- NULL
+attr(x, "y") <- 1
+```
+
+您可以使用`is.null()`函数来判断是否为`NULL`。
+
+`NULL`一般有两种用法：
+
+- 表示任意类型的空向量（长度为0的向量）。例如，如果使用函数`c()`，但没有任何参数，则会得到`NULL`，同时，如果将`NULL`连接到另一个向量，则该向量保持不变。
+
+```{r}
+c()
+```
+
+- 表示不存在的向量。例如，当一个函数的参数是可选的，但默认参数需要计算取得时，`NULL`可以用于这种默认函数参数（相关详情，可参阅\@ref(missing-arguments)节）。这与`NA`有本
+质的不同，`NA`表示向量的元素不存在。
+
+如果您对SQL语句比较熟悉，您可能了解SQL中也有`NULL`并且希望它的含义与R语言中相同，但数据库中的`NULL`其实与R中的`NA`是一致的。
+
+```{r}
+is.null(NULL)
+```
+
 ## 测试题答案 {#vector-quiz-answer}
+
+1. 原子向量的四种常见类型是逻辑型、整型、双精度型和字符型。两种罕见类型是复数型和原始型。
+
+2. 属性允许您关联任意附加元数据到对象。您可以使用`attr(x, "y")`和`attr(x, "y")  <- value`来获取和设施单个属性值；使用`attributes()`函数一次性设置所有属性值。
+
+3. 列表的元素可以是任意类型（甚至是列表）；原子向量中的元素必须是同一类型；矩阵中的元素必须是同一类型；数据框的不同列可以是不同类型。
+
+4. 可以为列表指定维度来创建数组。您可以使用`df$x <- matrix()`将矩阵赋值给数据框的列，或者在创建新数据框时使用`data.frame(x = I(matrix()))`来封装。
+
+5. tibble拥有更为优秀的打印函数，不会强制将字符串转为因子，同时提供更为严格的取子集方法。

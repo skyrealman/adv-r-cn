@@ -1,21 +1,56 @@
-# 全局 {#bigpicture}
+# 全景 {#bigpicture}
+```{r, include = FALSE}
+source("common.R")
+```
 
 ## 概述
 
+元编程是本书中最难的章节，因为它汇集了很多以前毫不相关的话题，迫使您去解决那些以前可能从未想过的问题。您还需要学习很多新的词汇，一开始似乎每个新术语都是由几个您从未听
+说的术语定义的。即使您是一名有着其他编程语言经验的程序员，您现有的技能也不太可能有很大帮助，因为很少有现代流行语言可以展示R提供的元编程水平。所以，如果您一开始感到沮丧
+或困惑，不要感到惊讶，这是每个人都会经历的过程。
+
+但我认为现在学习元编程比以往任何时候都容易，在过去几年中，元编程的理论与实践已经成熟，提供了强大的基础以及可以让您解决常见问题的工具。本章您将了解所有主要能力以及它们如何
+组合在一起。
+
 ### 题纲 {-}
+
+本章中的每个小节将介绍一种全新且重要的理念：
+
+- \@ref(code-is-data)节介绍代码即数据的相关知识，它将教会您如何通过捕获代码来创建和修改表达式。
+
+- \@ref(code-is-a-tree)节介绍代码的树状结构，称为抽象语法树。
+
+- \@ref(code-can-generate-code)节介绍如何以代码的方式创建新的表达式。
+
+- \@ref(evaluation-run-code)节演示如何通过在环境中计算表达式来执行它们。
+
+- \@ref(customing-evaluation-with-function)节介绍如何通过在新环境中提供自定义函数来定义计算。
+
+- \@ref(customing-evaluation-with-data)节将自定义扩展到数据掩码，这模糊了环境和数据框之间的界限。
+
+- \@ref(quosure)节介绍了一种名为quosure的新数据结构，它使得元编程更加简单。
 
 ### 先决条件 {-}
 
-## 代码即数据
+本章将介绍使用`rlang`包来掌握元编程全景的方式，后面的章节也会介绍使用R基础包做类似事情的方法，我们还将使用`lobstr`包来探索代码树的结构。
 
-## 代码是语法树
+```{r}
+library(rlang)
+library(lobstr)
+```
 
-## 代码可以生成代码
+请确保在学习本章前，您对R语言的环境（第\@ref(environment-basic)节）与数据框（第\@ref(dataframe-and-tibble)）这两个概念已经十分了解。
 
-## 计算运行代码
+## 代码即数据 {#code-is-data}
 
-## 使用函数定制计算
+## 代码是语法树 {#code-is-a-tree}
 
-## 使用数据定制计算
+## 代码可以生成代码 {#code-can-generate-code}
 
-## Quosure
+## 计算运行代码 {#evaluation-run-code}
+
+## 使用函数定制计算 {#customing-evaluation-with-function}
+
+## 使用数据定制计算 {#customing-evaluation-with-data}
+
+## Quosure {#quosure}

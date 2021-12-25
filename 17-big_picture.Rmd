@@ -171,8 +171,123 @@ cv(`)`)
 
 ## 计算运行代码 {#evaluation-run-code}
 
+前文所述的检查与修改代码的能力给您提供了一组强大的工具，但当您进行代码计算时，您可以使用另外一组工具（如执行或运行表达式）。计算一个表达式需要一个环境，它告诉R表达式中的符号都代表什么意思，
+您将在第\@ref(evaluation)章中学到详细知识。
+
+一个重要的计算表达式的工作具是 `base::eval()`，它接受一个表达式和一个环境作为参数：
+
+```{r}
+eval(expr(x + y), env(x = 1, y = 10))
+eval(expr(x + y), env(x = 2, y = 100))
+```
+
+如果您没有提交环境参数，`eval`使用当前环境：
+
+```{r}
+x <- 10
+y <- 100
+eval(expr(x + y))
+```
+
+手动执行计算代码的一大优势是可以调整环境，这样做有两个主要原因：
+
+- 临时覆盖一些功能以实现特定领域的语言
+- 添加数据掩码，以便您可以引用数据框中的变量，就像它们是环境中的变量一样
+
 ## 使用函数定制计算 {#customing-evaluation-with-function}
+
+上面的例子使用了一个将`x`和`y`绑定到向量的环境，容易让人忽略的是您其实还将名称绑定到了函数，从而允许您覆盖现有函数的行为。这是一种非常重要的思想，
+我在将在第\@ref(translating)章中探索从R生成HTML和LaTeX的相关问题。下面的例子让您先行体会一下这样的功能，在例子中，我在一个特殊的环境中计算代码，
+其中 `*`和 `+` 已经被覆盖为使用字符串参数进行计算。
+
+```{r}
+string_math <- function(x) {
+    e <- env(
+        caller_env(),
+        "+" = function(x, y) paste0(x, y),
+        "*" = function(x, y) strrep(x, y)
+    )
+    eval(enexpr(x), e)
+}
+
+name <- "Hadley"
+string_math("Hello " + name)
+string_math(("x" * 2 + "-y") * 3)
+```
+
+dplyr将这一思想发挥到了极致，在生成 SQL 的环境中运行代码，以便在远程数据库中执行。
+
+```{r}
+library(dplyr)
+
+con <- DBI::dbConnect(RSQLite::SQLite(), filename = ":memory:")
+mtcars_db <- copy_to(con, mtcars)
+
+mtcars_db %>% filter(cyl > 2) %>% select(mpg: hp) %>% head(10) %>% show_query()
+
+DBI::dbDisconnect(con)
+```
 
 ## 使用数据定制计算 {#customing-evaluation-with-data}
 
+重新绑定函数是一种非常强大的技术，但它往往需要大量投入。一个更直接的实际应用是将计算所需的变量修改为在数据框中寻找而不是在环境中寻找。
+这种思想是 `subset()`和 `transform()`等函数的重要基础，也是很多诸如 `ggplot2::aes()`和 `dplyr::mutate()`这些tidyverse函数的思想。
+我们也可以使用 `eval()`函数来实现这样的功能，但使用 `eval()`可能会带来潜在的风险（详见\@ref(base-evaluation)节），因为我们通常使用
+`rlang::eval_tidy()`函数代替。
+
+除了表达式与环境，`eval_tidy()`还需要一个数据框类型的数据掩码： 
+
+```{r}
+df <- data.frame(x = 1:5, y = sample(5))
+eval_tidy(expr(x + y), df)
+```
+
+使用数据掩码进行计算对于交互式分析来说是一种有用的技术，因为他允许您直接编写 `x + y` 而不用写 `df$x + df$y`。然而这种方便是有代价的：
+它会造成模糊性。在\@ref(data-masks)节中，您将学习如何使用 `.data`和 `.env`这样的特殊参数来处理歧义。
+
+我们可以使用 `enexpr()`将上述的模式包装成一个函数，如下列代码我们定义了一个类似于 `base::with()`的函数：
+
+```{r}
+with2 <- function(df, expr) {
+    eval_tidy(enexpr(expr), df)
+}
+
+with2(df, x + y)
+```
+
+不幸的是，这个函数有一个微妙的错误，我们需要一个新的数据结构来帮助处理它。
+
 ## Quosure {#quosure}
+
+为了让问题更明显，我修改了 `with2()`函数，在原有的函数中其实也会有问题的存在，只是很难看到。
+
+```{r}
+with2 <- function(df, expr) {
+    a <- 1000
+    eval_tidy(enexpr(expr), df)
+}
+```
+
+当我们使用 `with2()`函数引用一个变量 `a`时，我们可以看到问题。我们希望 `a`的值来自外部的绑定值(10)，而不是内部传入的值（1000）：
+
+```{r}
+df <- data.frame(x = 1:3)
+a <- 10
+with2(df, x + a)
+```
+
+出现这个问题是因为我们需要在编写捕获表达式的环境（其中a = 10）中计算它，而不是在 `with2()`中的环境开展计算（这其中的a = 1000）。
+
+幸运的是，我们可以通过一种新的数据结构来解决这个问题：将表达式和环境捆绑在一起的 **quosure**。 `eval_tidy()`如何使用quosure，我们只需要将
+`enexpr()`切换为 `enquo()`：
+
+```{r}
+with2 <- function(df, expr) {
+    a <- 1000
+    eval_tidy(enquo(expr), df)
+}
+
+with2(df, x + a)
+```
+
+无论何时使用数据掩码，都必须始终使用 `enquo()`而不是 `enexpr()`，这些内容我们将在第\@ref(evaluation)章中具体研究。

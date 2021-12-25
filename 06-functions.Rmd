@@ -20,7 +20,7 @@
 
 ## 函数组合调用
 
-## 静态作用域
+## 变量作用域 {#lexical-scoping}
 
 ### 变量名屏蔽
 
@@ -43,7 +43,56 @@
 ### 习题
 
 ## `...`(点点点)
+```{r}
+print(factor(letters), max.levels = 4)
 
+print(y ~ x, showEnv = TRUE)
+```
+
+```{r}
+mean(1,2,3)
+```
+
+```{r}
+function (x, trim = 0, na.rm = FALSE, ...) 
+{
+    if (!is.numeric(x) && !is.complex(x) && !is.logical(x)) {
+        warning("argument is not numeric or logical: returning NA")
+        return(NA_real_)
+    }
+    if (na.rm) 
+        x <- x[!is.na(x)]
+    if (!is.numeric(trim) || length(trim) != 1L) 
+        stop("'trim' must be numeric of length one")
+    n <- length(x)
+    if (trim > 0 && n) {
+        if (is.complex(x)) 
+            stop("trimmed means are not defined for complex data")
+        if (anyNA(x)) 
+            return(NA_real_)
+        if (trim >= 0.5) 
+            return(stats::median(x, na.rm = FALSE))
+        lo <- floor(n * trim) + 1
+        hi <- n + 1 - lo
+        x <- sort.int(x, partial = unique(c(lo, hi)))[lo:hi]
+    }
+    .Internal(mean(x))
+}
+```
+
+```{r}
+g09 <- function(x) x + 100
+g10 <- function() {
+  g09 <- 10
+  g09(g09)
+}
+g10()
+```
+
+```{r}
+names(.GlobalEnv)
+environment()
+```
 ### 习题
 
 ## 退出函数
@@ -62,9 +111,7 @@
 
 ### 重写函数为前置形式
 
-### 前置函数
-
-### 后置函数
+### 前置函数 {#prefix-form}
 
 ### 居中函数
 

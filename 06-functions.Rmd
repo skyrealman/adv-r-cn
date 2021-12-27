@@ -8,7 +8,7 @@
 
 ## 函数基础知识
 
-### 函数构成
+### 函数构成 {#function-components}
 
 ### 原始函数
 
@@ -18,7 +18,7 @@
 
 ### 习题
 
-## 函数组合调用
+## 函数组合调用 {#function-composition}
 
 ## 变量作用域 {#lexical-scoping}
 
@@ -32,7 +32,7 @@
 
 ### 习题
 
-## 惰性计算
+## 延迟计算 {#lazy-evaluation}
 
 ### Promise
 
@@ -107,9 +107,9 @@ environment()
 
 ### 习题
 
-## 函数的多种形式
+## 函数的多种形式 {#function-form}
 
-### 重写函数为前置形式
+### 重写函数为前置形式 {#prefix-transform}
 
 ### 前置函数 {#prefix-form}
 

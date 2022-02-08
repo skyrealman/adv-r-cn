@@ -1,15 +1,71 @@
-# 条件 {#conditions}
+# 状态 {#conditions}
 
 ## 概述 
 
+**状态系统**提供了一组工具，可以让函数的作者标识出可能发生的异常，并允许函数的用
+户进行处理。函数作者使用`stop()`(错误状态)、`warning()`(警告状态)、`message()`
+(消息状态)等函数发出状态**信号**，然后函数的用户可以用`tryCatch()`和`withCallingHandlers()`
+等函数处理它们。理解状态系统很重要，因为您通常需要同时扮演两个角色：从您创建的函
+数中发出状态信号，以及处理您调用函数发出的信号。
+
+R基于Common Lisp语言的思想提供了一个非常强大的状态系统。与R语言面向对象编程方法
+类似，它与当前流行的编程语言有很大不同，因此不太容易被理解，关于如何有效使用它的
+文章也比较少。本章的目的就是要改变这种状况，在这里，您将了解R语言状态系统的主要
+思想，以及一系列实用工具，这些工具将使您的代码更加强大。
+
+我在编写本章内容的时候找到了两篇很重要的参考文献，如果您想了解更多的状态系统的知识，
+可以阅读它们：
+
++ 由Robert Gentleman 和 Luke Tierney编写的[_A prototype of a condition system for R_][prototype]。这篇文章介绍
+了R语言状态系统的早期版本，虽然自本文档编写以来，R状态系统的实现有所改变，但它很
+好地概述了状态系统的各个部分是如何组合在一起的，并介绍了一些设计的思路。
+
++ 由Peter Seibel编写的[_Beyond exception handling: conditions and restarts_][beyond-handling]。这篇文章介绍了Lisp语言的异常处理，它与R的方法非常相似。它介绍了有益的设计思路
+和复杂的案例。我提供了这篇文章的R语言翻译版本：< http://adv-r.had.co.nz/beyond-exception-handling.html>
+
+同时我也发现了解状态系统底层的C语言实现是非常有意义的，如果您对这一块有兴趣，
+可以阅读我的[笔记](https://gist.github.com/hadley/4278d0a6d3a10e42533d59905fbed0ac)
+
 ### 测试 {-}
+
+通过完成下列测试，确定您是否需要阅读本章。可以\@ref(condition-quiz-answer)节找到
+测试题答案。
+
++ 三种最为重要的状态类型是什么？
+
++ 使用什么函数忽略代码块中产生的错误？
+
++ `tryCatch()`和`withCallingHandlers()`之间主要的区别是什么？
+
++ 为什么要创建自定义错误对象？
 
 ### 题纲 {-}
 
++ \@ref(signalling-conditions)节介绍了发出状态信号的基本工具，并讨论了每种类型状态
+的使用场景。
+
++ \@ref(ignoring-conditions)节介绍了处理状态的最简单工具：`try()`和`supressMessages()`
+函数可以处理状态信号，防止它们进入应用的顶层。
+
++ \@ref(handling-conditions)节介绍了状态对象及两个基本的状态处理工具：用于处理错误
+状态的`tryCatch()`函数和其它一切状态的`withCallingHandlers()`函数。
+
++ \@ref(custom-conditions)节介绍了如何扩展内置状态对象，以便可以存储有用的数据，
+状态处理程序可以使用这些数据做出更明智的决策。
+
++ \@ref(condition-applications)节以基于前面章节介绍的一个底层工具实现应用程序抓包
+来结束本章。
+
 ### 前置条件
 
+除了R语言基础包外，本章还使用`rlang`包状态信号与处理函数。
 
-## 信号发送条件
+```{r}
+library(rlang)
+```
+
+
+## 信号发送条件 {#signalling-conditions}
 
 ### 错误信号
 
@@ -19,11 +75,11 @@
 
 ### 习题
 
-## 忽略条件
+## 忽略状态 {#ignoring-conditions}
 
-## 处理条件
+## 处理状态 {#handling-conditions}
 
-### 条件对象
+### 状态对象
 
 ### 退出处理程序
 
@@ -33,7 +89,7 @@
 
 ### 习题
 
-## 自定义条件 {#custom-conditions}
+## 自定义状态 {#custom-conditions}
 
 ### 定义错误消息
 
@@ -43,7 +99,7 @@
 
 ### 习题
 
-## 应用
+## 应用 {#condition-applications}
 
 ### 失败值
 
@@ -58,3 +114,7 @@
 ### 习题
 
 ## 测试题答案 {#condition-quiz-answer}
+
+
+[prototype]: http://homepage.stat.uiowa.edu/~luke/R/exceptions/simpcond.html
+[beyond-handling]: http://www.gigamonkeys.com/book/beyond-exception-handling-conditions-and-restarts.html
